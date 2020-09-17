@@ -1,3 +1,8 @@
+
+## Sistema de Inventario y Punto de Venta
+## DataPlus open system
+### Inicio 17-Sept-2020
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
