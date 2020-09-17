@@ -10,11 +10,9 @@ function App() {
         <p>
           SISTEMA DE INVENTARIO Y PUNTO DE VENTA
         </p>
-        <a
-          
-        >
+        <p>
           DATAPLUS OPEN SYSTEM
-        </a>
+        </p>
       </header>
     </div>
   );
