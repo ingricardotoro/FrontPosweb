@@ -1,21 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import PanelAdmin from './pages/PanelAdmin/PanelAdmin';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          SISTEMA DE INVENTARIO Y PUNTO DE VENTA
-        </p>
-        <p>
-          DATAPLUS OPEN SYSTEM
-        </p>
-      </header>
+      <Router>
+        <Route exact path='/' component={PanelAdmin}/>
+      </Router>
     </div>
   );
 }
 
 export default App;
+
+
