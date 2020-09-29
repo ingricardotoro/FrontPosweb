@@ -14,7 +14,7 @@ export default function Header(){
                                 <img src={userImg} alt="User default" className="img-radius"/>
                                 <div className="user-details">
                                     <span className="mb-0 font-weight-bold">Nombre del empleado</span>
-                                    <div id="more-details"><small>Cargo<i className="fa fa-chevron-down m-l-5"></i></small></div>
+                                    <div id="more-details"><small>Cargo<i className="ti-angle-down"></i></small></div>
                                 </div>
                             </div>
                             <ul className="nav pcoded-inner-navbar">
@@ -24,7 +24,7 @@ export default function Header(){
                                 <li className="nav-item pcoded-hasmenu">
                                     <a className="nav-link">
                                         <span className="pcoded-micon">
-                                            <i className="feather icon-home"></i>
+                                            <i className="ti-home"></i>
                                         </span>
                                         <span className="pcoded-mtext">Empleados</span>
                                     </a>
@@ -36,7 +36,7 @@ export default function Header(){
                                 <li className="nav-item pcoded-hasmenu">
                                     <a href={null} className="nav-link">
                                         <span className="pcoded-micon">
-                                            <i className="feather icon-home"></i>
+                                            <i className="ti-home"></i>
                                         </span>
                                         <span className="pcoded-mtext">Proveedores</span>
                                     </a>
@@ -48,7 +48,7 @@ export default function Header(){
                                 <li className="nav-item pcoded-hasmenu">
                                     <a href={null} className="nav-link">
                                         <span className="pcoded-micon">
-                                            <i className="feather icon-home"></i>
+                                            <i className="ti-home"></i>
                                         </span>
                                         <span className="pcoded-mtext">Clientes</span>
                                     </a>
