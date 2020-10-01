@@ -15,12 +15,13 @@ export default function Login(){
     useEffect(()=>{
         if(estaLogeado) return history.push('/home')
     }, [estaLogeado, history])
-
+    */
     const handleSubmit = (e)=>{
         e.preventDefault()
         //console.log(username, password)
-        login({username, password})
-    }*/
+        window.location.href='panel-admin'
+        //login({username, password})
+    }
 
     return (
         <>
@@ -34,7 +35,7 @@ export default function Login(){
                                 <h4 className="mb-3 f-w-400">Iniciar Sesion</h4>
                                 <hr/>
                                  
-                                <form  /*onSubmit={handleSubmit}*/>
+                                <form  onSubmit={handleSubmit}>
                                     <div className="form-group mb-3">
                                         <input  type="text" 
                                                 className="form-control"
