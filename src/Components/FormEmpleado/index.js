@@ -120,7 +120,7 @@ export default function FormularioEmpleado(){
                                 </div>            
                             </div>
                             <div className="form-group row m-b-0">
-                                <div className="offset-sm-9 col-sm-10">
+                                <div className="offset-sm-8 col-sm-10">
                                     <button type="submit" className="btn btn-primary">
                                         <i className="ti-save p-2"></i>
                                         Agregar Empleado
