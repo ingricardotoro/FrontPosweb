@@ -22,6 +22,7 @@ export default function Navbar(){
                         <div className="dropdown-menu dropdown-menu-right profile-notification">
                             <div className="pro-head">
                                 <img src={userImg} alt="User-default" className="img-radius"/>
+                            QUE PEDO QUE PEDO
                             </div>
                             <ul className="pro-body">
                                 <li>

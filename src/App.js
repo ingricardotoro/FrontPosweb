@@ -1,20 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import PanelAdmin from './pages/PanelAdmin/PanelAdmin';
-
-import './App.css';
+//Pages 
+import Home from 'pages/Home';
+import PanelAdmin from 'pages/PanelAdmin';
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Router>
-        <Route exact path='/' component={PanelAdmin}/>
-      </Router>
-    </div>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/panel-admin" component={PanelAdmin} />
+      </Router>  
+    </>
   );
 }
 
 export default App;
-
-

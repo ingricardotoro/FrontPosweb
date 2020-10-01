@@ -10,7 +10,7 @@ $(document).ready(function() {
         ThemeBackgroundPattern: 'pattern2',
         HeaderBackground: 'theme1',
         LHeaderBackground: 'theme5',
-        NavbarBackground: 'theme1',
+        NavbarBackground: 'themelight1',
         ActiveItemBackground: 'theme5',
         SubItemBackground: 'theme2',
         ActiveItemStyle: 'style0',
