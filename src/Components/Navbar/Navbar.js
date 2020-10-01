@@ -20,18 +20,18 @@ export default function Navbar(){
                 <ul className="navbar-nav ml-auto">
                     <li>
                         <div className="dropdown drp-user">
-                            <Link className="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <Link to="#!" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 <i className="ti-user"></i>
                             </Link>
                             <div className="dropdown-menu dropdown-menu-right profile-notification">
                                 <div className="pro-head">
                                     <img src={userImg} alt="user-default"/>
                                     <span>Nombre</span>
-                                    <Link className="dud-logout" title="Logout"><i className="ti-lock"></i></Link>
+                                    <Link to="#!" className="dud-logout" title="Logout"><i className="ti-lock"></i></Link>
                                 </div>
                                 <ul className="pro-body">
-                                    <li><Link className="dropdown-item"><i className="ti-user"></i>Perfil</Link></li>
-                                    <li><Link className="dropdown-item"><i className="ti-lock"></i>Cerrar Sesion</Link></li>
+                                    <li><Link to="#!" className="dropdown-item"><i className="ti-user"></i>Perfil</Link></li>
+                                    <li><Link to="#!" className="dropdown-item"><i className="ti-lock"></i>Cerrar Sesion</Link></li>
                                 </ul>
                             </div>
                         </div>

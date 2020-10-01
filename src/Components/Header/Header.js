@@ -1,5 +1,5 @@
 import React from 'react';
-import  {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import userImg from './user_default.png'
 
@@ -21,19 +21,19 @@ export default function Header(){
                         <ul className="nav pcoded-inner-navbar">
                             <li className="nav-item pcoded-menu-caption"><label htmlFor="">Usuarios</label></li>
                             <li className="nav-item">
-                                <Link className="nav-link pcoded-hasmenu" to="/panel-admin">
+                                <Link className="nav-link pcoded-hasmenu" to="#!">
                                     <span className="pcoded-micon"><i className="ti-user"></i></span>
                                     <span className="pcoded-mtext">Empleados</span>
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link pcoded-hasmenu" to="/panel-admin">
+                                <Link className="nav-link pcoded-hasmenu" to="#!">
                                     <span className="pcoded-micon"><i className="ti-user"></i></span>
                                     <span className="pcoded-mtext">Clientes</span>
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link pcoded-hasmenu" to="/panel-admin">
+                                <Link className="nav-link pcoded-hasmenu" to="#!">
                                     <span className="pcoded-micon"><i className="ti-truck"></i></span>
                                     <span className="pcoded-mtext">Proveedores</span>
                                 </Link>
