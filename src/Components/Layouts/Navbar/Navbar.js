@@ -25,7 +25,7 @@ export default function Navbar(){
                             </Link>
                             <div className="dropdown-menu dropdown-menu-right profile-notification">
                                 <div className="pro-head">
-                                    <img src={userImg} alt="user-default"/>
+                                    <img src={userImg} alt="user-default" className="rounded-circle"/>
                                     <span>Nombre</span>
                                     <Link to="#!" className="dud-logout" title="Logout"><i className="ti-lock"></i></Link>
                                 </div>

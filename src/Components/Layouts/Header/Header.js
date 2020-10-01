@@ -21,7 +21,7 @@ export default function Header(){
                         <ul className="nav pcoded-inner-navbar">
                             <li className="nav-item pcoded-menu-caption"><label htmlFor="">Usuarios</label></li>
                             <li className="nav-item">
-                                <Link className="nav-link pcoded-hasmenu" to="#!">
+                                <Link className="nav-link pcoded-hasmenu" to={'panel-admin/empleados'}>
                                     <span className="pcoded-micon"><i className="ti-user"></i></span>
                                     <span className="pcoded-mtext">Empleados</span>
                                 </Link>
