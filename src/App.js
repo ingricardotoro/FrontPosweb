@@ -1,16 +1,18 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 //Pages 
-import Home from 'pages/Home';
-import PanelAdmin from 'pages/PanelAdmin';
+import Home from 'Pages/Home';
+import PanelAdmin from 'Pages/PanelAdmin';
 
 function App() {
   return (
     <>
       <Router>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/panel-admin" component={PanelAdmin}></Route>
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/panel-admin" component={PanelAdmin}/>
+        </Switch>
       </Router>  
     </>
   );

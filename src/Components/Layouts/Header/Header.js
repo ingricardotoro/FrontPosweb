@@ -1,20 +1,15 @@
 import React from 'react';
 import {Link, useRouteMatch} from 'react-router-dom';
 //import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-
 import userImg from './user_default.png';
 
-/*
-import Empleados from '../../Empleados';
-<Router>
-<Route exact path="panel-admin/empleados" component={Empleados}/>
-</Router>
-*/
+import Navbar from '../Navbar/Navbar'
 
 export default function Header(){
-    const {url} = useRouteMatch();
+    const match = useRouteMatch();
     return (
         <>
+            <Navbar/>
             <nav className="pcoded-navbar menupos-fixed">
                 <div className="navbar-wrapper">
                     <div className="navbar-content scroll-div">
@@ -30,7 +25,7 @@ export default function Header(){
                         <ul className="nav pcoded-inner-navbar">
                             <li className="nav-item pcoded-menu-caption"><label htmlFor="">Inicio</label></li>
                             <li className="nav-item">
-                                <Link className="nav-link pcoded-hasmenu" to={`${url}/inicio`}>
+                                <Link className="nav-link pcoded-hasmenu" to={`${match.url}/inicio`}>
                                     <span className="pcoded-micon"><i className="ti-home"></i></span>
                                     <span className="pcoded-mtext">Inicio</span>
                                 </Link>
@@ -38,7 +33,7 @@ export default function Header(){
                             <li className="nav-item pcoded-menu-caption"><label htmlFor="">Usuarios</label></li>
                             
                             <li className="nav-item">
-                                <Link className="nav-link pcoded-hasmenu" to={`${url}/empleados`}>
+                                <Link className="nav-link pcoded-hasmenu" to={`${match.url}/empleados`}>
                                     <span className="pcoded-micon"><i className="ti-user"></i></span>
                                     <span className="pcoded-mtext">Empleados</span>
                                 </Link>
@@ -59,8 +54,7 @@ export default function Header(){
                         </ul>
                     </div>
                 </div>
-            </nav>
-        
+            </nav>       
         </>
     )
 }
