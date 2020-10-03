@@ -1,6 +1,11 @@
 import React from 'react'
 
 export default function FormularioEmpleado(){
+
+    const handleSubmit = e =>{
+        e.preventDefault();
+    }
+
     return(
         <>
         <div className="row">
@@ -10,7 +15,7 @@ export default function FormularioEmpleado(){
                         <h4 className="card-title">Empleados</h4>
                         <hr/>
                         <div className="errores"></div>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="card">
@@ -28,6 +33,13 @@ export default function FormularioEmpleado(){
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <input type="text" className="form-control" placeholder="RTN"/>
+                                            </div>
+                                            <div className="form-group col-md-12">
+                                                <input type="date" className="form-control" placeholder="Fecha de Nacimiento"/>
+                                            </div>
+                                            <div className="form-group col-md-12">
+                                                <label htmlFor="avatarUser" className="p-2">Foto</label>
+                                                <input type="file" name="avatarUser" className="form-file"/>
                                             </div>
                                         </div>
                                     </div>
@@ -103,7 +115,7 @@ export default function FormularioEmpleado(){
                                                 <input type="text" className="form-control" placeholder="Código de Empleado"/>
                                             </div>
                                             <div className="form-group col-md-12">
-                                                <input type="text" className="form-control" placeholder="Cargo"/>
+                                                <input type="text" className="form-control" placeholder="Cargo, Posición de trabajo"/>
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <input type="text" className="form-control" placeholder="Direccion"/>

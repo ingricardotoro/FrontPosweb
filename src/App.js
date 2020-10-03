@@ -10,7 +10,7 @@ function App() {
     <>
       <Router>
         <Route exact path="/" component={Home}/>
-        <Route exact path="/panel-admin" component={PanelAdmin} />
+        <Route exact path="/panel-admin" component={PanelAdmin}></Route>
       </Router>  
     </>
   );

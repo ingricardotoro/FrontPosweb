@@ -14,7 +14,7 @@ export default function Empleados(){
                                 </div>
                                 <div className="col-4 mb-2">
                                     <div className="text-right">
-                                        <Link className="btn btn-primary" to={'panel-admin/empleados'}>
+                                        <Link className="btn btn-primary" to='#!'>
                                             <span className="pcoded-micon"><i className="ti-user"></i></span>
                                             <span className="pcoded-mtext p-2">Crear Empleado</span>
                                         </Link>
@@ -25,10 +25,12 @@ export default function Empleados(){
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Codigo Empleado</th>
+                                            <th>COD. Empleado</th>
                                             <th>Nombre</th>
                                             <th>Cargo</th>
+                                            <th>No.Identidad</th>
                                             <th>RTN</th>
+                                            <th>Telefono</th>
                                             <th className="w100 text-nowrap">Acciones</th>
                                         </tr>
                                     </thead>
@@ -37,7 +39,9 @@ export default function Empleados(){
                                             <td>001</td>
                                             <td>Nombre</td>
                                             <td>Cargo</td>
+                                            <td>No. Identidad</td>
                                             <td>RTN</td>
+                                            <td>Telefono</td>
                                             <td className="text-nowrap text-center">
                                                 <Link
                                                     data-toggle="tooltip" 
