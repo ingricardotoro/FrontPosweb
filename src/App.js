@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-
 //Pages 
 import Home from 'Pages/Home';
 import PanelAdmin from 'Pages/PanelAdmin';
@@ -8,12 +7,13 @@ import PanelAdmin from 'Pages/PanelAdmin';
 function App() {
   return (
     <>
-      <Router>
+    <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route exact path="/panel-admin" component={PanelAdmin}/>
+          <Route path="/panel-admin" component={PanelAdmin}/>
         </Switch>
       </Router>  
+      
     </>
   );
 }
