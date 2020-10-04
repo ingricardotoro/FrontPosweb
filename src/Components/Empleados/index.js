@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Empleados(){
     return(
@@ -14,7 +14,7 @@ export default function Empleados(){
                                 </div>
                                 <div className="col-4 mb-2">
                                     <div className="text-right">
-                                        <Link className="btn btn-primary" to='#!'>
+                                        <Link className="btn btn-primary" to='/panel-admin/empleados/nuevo'>
                                             <span className="pcoded-micon"><i className="ti-user"></i></span>
                                             <span className="pcoded-mtext p-2">Crear Empleado</span>
                                         </Link>
@@ -55,7 +55,6 @@ export default function Empleados(){
                                                     data-original-title="Borrar"
                                                 ><i className="ti-trash"></i></Link>
                                             </td>
-
                                         </tr>
                                     </tbody>
                                 </table>
@@ -63,7 +62,7 @@ export default function Empleados(){
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>     
         </>
     )
 }
