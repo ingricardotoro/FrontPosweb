@@ -5,11 +5,10 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Header from '../../Components/Layouts/Header/Header';
 import Inicio from '../../Components/Layouts/Inicio';
 
+//CRUD Empleados
 import Empleados from '.../../Components/Empleados';
-/*
-import FormularioEmpleado from '../../Components/FormEmpleado';
-<Route exact parh={`/panel-admin/empleados/nuevo`} component={FormularioEmpleado}/>
-*/
+import FormularioEmpleado from '../../Components/Empleados/FormEmpleado';
+
 export default function PanelAdmin() {
 
     return (
@@ -20,8 +19,9 @@ export default function PanelAdmin() {
                 <div className="pcoded-content">
                     <div className="row">
                         <div className="col-sm-12">
-                            <Route exact path={`/panel-admin/inicio`} component={Inicio}/>                      
-                            <Route exact path={`/panel-admin/empleados`} component={Empleados}/>
+                            <Route exact path={`/admin/inicio`} component={Inicio}/>                      
+                            <Route exact path={`/admin/empleados`} component={Empleados}/>
+                            <Route exact path={`/admin/empleados/nuevo`} component={FormularioEmpleado}/>
                         </div>
 
                     </div>

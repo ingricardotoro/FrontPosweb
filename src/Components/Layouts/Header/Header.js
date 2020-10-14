@@ -25,7 +25,7 @@ export default function Header(){
                         <ul className="nav pcoded-inner-navbar">
                             <li className="nav-item pcoded-menu-caption"><label htmlFor="">Inicio</label></li>
                             <li className="nav-item">
-                                <Link className="nav-link pcoded-hasmenu" to={`/panel-admin/inicio`}>
+                                <Link className="nav-link pcoded-hasmenu" to={`/admin/inicio`}>
                                     <span className="pcoded-micon"><i className="ti-home"></i></span>
                                     <span className="pcoded-mtext">Inicio</span>
                                 </Link>
@@ -33,7 +33,7 @@ export default function Header(){
                             <li className="nav-item pcoded-menu-caption"><label htmlFor="">Usuarios</label></li>
                             
                             <li className="nav-item">
-                                <Link className="nav-link pcoded-hasmenu" to={`/panel-admin/empleados`}>
+                                <Link className="nav-link pcoded-hasmenu" to={'/admin/empleados'}>
                                     <span className="pcoded-micon"><i className="ti-user"></i></span>
                                     <span className="pcoded-mtext">Empleados</span>
                                 </Link>

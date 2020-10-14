@@ -1,26 +1,47 @@
-import React from 'react'
-//import {Link, useHistory} from 'react-router-dom'
+import React, {useState, useContext, useEffect } from 'react';
+import {Link, useHistory} from 'react-router-dom';
 
-//import useUser from '../../Hooks/useUser'
+import AuthContext from '../../Context/autenticacion/authContext';
+import AlertaContext from '../../Context/alertas/alertaContext';
 
 import logo from './logo.png'
 
-export default function Login(){
-    /*const [username, setUserName] = useState('')
-    const [password, setPassword] = useState('')
-    const history = useHistory()
+export default function Login(props){
+    const alertaContext = useContext(AlertaContext);
+    const {alerta, mostrarAlerta} = alertaContext;
 
-    const {loginCargando, loginError, login, estaLogeado} = useUser()
+    const authContext = useContext(AuthContext);
+    const {mensaje, autenticado, iniciarSesion} = authContext;
 
     useEffect(()=>{
-        if(estaLogeado) return history.push('/home')
-    }, [estaLogeado, history])
-    */
+        if(autenticado) return props.history.push('/admin')
+        if(mensaje) mostrarAlerta(mensaje.msg, mensaje.tipoAlerta);
+    }, [autenticado, props.history, mensaje])
+
+    const [usuario, setUsuario] = useState({
+        username: '',
+        password: ''
+    });
+
+    const {username, password} = usuario;
+
+    const onChange = e =>{
+        setUsuario({
+            ...usuario,
+            [e.target.name] : e.target.value
+        })
+    }
+    
     const handleSubmit = (e)=>{
-        e.preventDefault()
-        //console.log(username, password)
-        window.location.href='panel-admin'
-        //login({username, password})
+        e.preventDefault();
+        console.log(username, password);
+
+        //Validaciones
+        if(username.trim()==='' || password.trim()===''){
+            mostrarAlerta('El nombre de usuario y la contraseña son obligatorios', 'alert-danger alert-dismissible fade show')
+        }
+        
+        iniciarSesion({username, password});
     }
 
     return (
@@ -28,6 +49,17 @@ export default function Login(){
         <div className="auth-wrapper">
             <div className="auth-content text-center">
                 <img src={logo} alt="LOGO" className="img-fluid mb-4"/>
+                {alerta ?
+                    (
+                    <div className={`alert ${alerta.tipoAlerta}`}>
+                        {alerta.msg}
+                        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">X</span>
+                        </button>
+                    </div>
+                    )
+                    : null
+                }
                 <div className="card borderless">
                     <div className="row align-items-center">
                         <div className="col-md-12">
@@ -39,19 +71,21 @@ export default function Login(){
                                     <div className="form-group mb-3">
                                         <input  type="text" 
                                                 className="form-control"
-                                                /*value={username} 
-                                                onChange={e=> setUserName(e.target.value)}*/
+                                                name="username"
+                                                value={username} 
+                                                onChange={onChange}
                                                 placeholder="Nombre de usuario"/>
                                     </div>
                                     <div className="form-group mb-4">
                                         <input type="password" 
-                                               className="form-control" 
-                                               /*value={password} 
-                                               onChange={e=>setPassword(e.target.value)}*/
+                                               className="form-control"
+                                               name="password" 
+                                               value={password} 
+                                               onChange={onChange}
                                                placeholder="Contraseña"/>
                                     </div>
                                     <button className="btn btn-block btn-primary mb-4">
-                                            Iniciar Sesion
+                                        Iniciar Sesion
                                     </button>
                                 </form>
                             </div>
