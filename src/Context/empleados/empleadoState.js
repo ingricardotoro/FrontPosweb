@@ -23,13 +23,13 @@ const EmpleadoState = props => {
 
     const [state, dispatch] = useReducer(empleadoReducer, initalState);
 
-    const obtenerEmpleados = async empleado => {
+    const obtenerEmpleados = async () => {
         try {
             const response = await Axios.get('employees');
             console.log(response);
             dispatch({
                 type: LISTAR_EMPLEADOS,
-                payload: response.employees
+                payload: response.data.employees
             })
         } catch (error) {
             console.log(error);

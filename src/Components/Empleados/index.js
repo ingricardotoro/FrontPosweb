@@ -1,5 +1,4 @@
-import React from 'react';
-import { useContext } from 'react';
+import React,  { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import empleadoContext from '../../Context/empleados/empleadoContext';
@@ -7,7 +6,11 @@ import empleadoContext from '../../Context/empleados/empleadoContext';
 export default function Empleados(){
 
     const EmpleadoContext = useContext(empleadoContext);
-    const { empleados, guardarEmpleadoActual } = EmpleadoContext;
+    const { empleados, obtenerEmpleados, guardarEmpleadoActual } = EmpleadoContext;
+
+    useEffect(()=>{
+        obtenerEmpleados();
+    }, [])
 
     const seleccionarEmpleado = empleado => {
         guardarEmpleadoActual(empleado);
@@ -25,7 +28,7 @@ export default function Empleados(){
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-8">
-                                    <h4 className="card-title">Empleados( 4 )</h4>
+                                    <h4 className="card-title">Empleados( {empleados.length} )</h4>
                                 </div>
                                 <div className="col-4 mb-2">
                                     <div className="text-right">
@@ -58,13 +61,13 @@ export default function Empleados(){
                                             (
                                                 empleados.map(empleado => {
                                                     return(
-                                                    <tr key={empleado.personid} >  
+                                                    <tr key={empleado._id} >  
                                                         <td>{empleado.codeEmployee}</td>
-                                                        <td>{empleado.name} {empleado.lastname}</td>
+                                                        <td>{empleado.personid.name} {empleado.personid.lastname}</td>
                                                         <td>{empleado.workPosition}</td>
-                                                        <td>{empleado.identidad}</td>
-                                                        <td>{empleado.rtn}</td>
-                                                        <td>{empleado.phone1}</td>
+                                                        <td>{empleado.personid.identidad}</td>
+                                                        <td>{empleado.personid.rtn}</td>
+                                                        <td>{empleado.personid.phone1}</td>
                                                         <td className="text-nowrap text-center">
                                                             <button
                                                                 data-toggle="tooltip" 
@@ -81,7 +84,6 @@ export default function Empleados(){
                                                         </td>
                                                     </tr> 
                                                     )
-
                                                 })
                                             )
                                         }

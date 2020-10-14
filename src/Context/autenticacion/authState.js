@@ -20,11 +20,11 @@ const AuthState = props =>{
     const iniciarSesion = async data =>{
         try {
             const response = await Axios.post('auth/login', data);
-            console.log(response);
+            console.log('iniciar sesion ', response);
 
             dispatch({
                 type: LOGIN_EXITOSO,
-                payload: response
+                payload: response.data
             });
 
         } catch (error) {
