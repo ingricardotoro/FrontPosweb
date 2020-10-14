@@ -6,6 +6,7 @@ import AlertaContext from '../../Context/alertas/alertaContext';
 import logo from './logo.png'
 
 export default function Login(props){
+    
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
 
