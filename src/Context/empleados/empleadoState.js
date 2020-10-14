@@ -50,6 +50,12 @@ const EmpleadoState = props => {
         }
     }
 
+    const validarEmpleado = ()=>{
+        dispatch({
+            type: VALIDAR_EMPLEADO
+        })
+    }
+
     const guardarEmpleadoActual = empleado => {
         dispatch({
             type: ACTUAL_EMPLEADO,
@@ -65,6 +71,7 @@ const EmpleadoState = props => {
                 empleadoseleccionado: state.empleadoseleccionado,
                 obtenerEmpleados,
                 agregarEmpleado,
+                validarEmpleado,
                 guardarEmpleadoActual
             }}
         >
