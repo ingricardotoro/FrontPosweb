@@ -34,7 +34,7 @@ const AlertaState = props => {
                 mostrarAlerta
             }}
         >
-            {props.childen}
+            {props.children}
         </alertaContext.Provider>
     )
 }

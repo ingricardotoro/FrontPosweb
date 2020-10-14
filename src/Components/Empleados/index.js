@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import empleadoContext from '../../Context/empleados/empleadoContext';
 
-export default function Empleados({empleado}){
+export default function Empleados(){
 
     const EmpleadoContext = useContext(empleadoContext);
     const { empleados, guardarEmpleadoActual } = EmpleadoContext;
