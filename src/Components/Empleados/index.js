@@ -36,6 +36,13 @@ export default function Empleados(){
                                             <span className="pcoded-micon"><i className="ti-user"></i></span>
                                             <span className="pcoded-mtext p-2">Crear Empleado</span>
                                         </Link>
+                                        <button className="btn btn-primary m-2"
+                                                data-toggle="modal"
+                                                data-target="#modalVerMas"
+                                        >
+                                            <span className="pcoded-micon"><i className="ti-plus"></i></span>
+                                            <span className="pcoded-mtext p-2">Ver mas..</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -93,6 +100,68 @@ export default function Empleados(){
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div id="modalVerMas" 
+                 className="modal fade"
+                 tabIndex="-1"
+                 role="dialog"
+                 aria-modal="true"
+            >
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Más datos...</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="close">
+                                <span aria-hidden="true">X</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="table-responsive">
+                            <table className="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Telefono 2</th>
+                                            <th>Fecha Nacimiento</th>
+                                            <th>Email</th>
+                                            <th>País</th>
+                                            <th>Ciudad</th>
+                                            <th>Colonia</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            empleados.length === 0
+                                            ?
+                                            <tr>No hay empleados</tr>
+                                            :
+                                            (
+                                                empleados.map((empleado, i) => {
+                                                    return(
+                                                    <tr key={i} >  
+                                                        <td>+504{empleado.personid.phone2}</td>
+                                                        <td>{empleado.personid.fec_nac}</td>
+                                                        <td>{empleado.personid.email} </td>
+                                                        <td>{empleado.personid.country}</td>
+                                                        <td>{empleado.personid.city}</td>
+                                                        <td>{empleado.personid.location}</td>
+                                                    </tr> 
+                                                    )
+                                                })
+                                            )
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal" aria-label="close">
+                                Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>    
             </div>     
         </>
     )
