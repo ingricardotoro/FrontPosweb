@@ -1,7 +1,22 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Empleados(){
+import empleadoContext from '../../Context/empleados/empleadoContext';
+
+export default function Empleados({empleado}){
+
+    const EmpleadoContext = useContext(empleadoContext);
+    const { empleados, guardarEmpleadoActual } = EmpleadoContext;
+
+    const seleccionarEmpleado = empleado => {
+        guardarEmpleadoActual(empleado);
+    }
+
+    const onClickEliminar = () => {
+        alert('vamos a eliminar ayudaaaaaaaaaa!')
+    }
+
     return(
         <>
             <div className="row">
@@ -35,27 +50,41 @@ export default function Empleados(){
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>001</td>
-                                            <td>Nombre</td>
-                                            <td>Cargo</td>
-                                            <td>No. Identidad</td>
-                                            <td>RTN</td>
-                                            <td>Telefono</td>
-                                            <td className="text-nowrap text-center">
-                                                <Link
-                                                    data-toggle="tooltip" 
-                                                    className="btn btn-sm btn-warning"
-                                                    data-original-title="Editar"
-                                                ><i className="ti-pencil"></i></Link>
+                                        {
+                                            empleados.length === 0
+                                            ?
+                                            <tr>No hay empleados</tr>
+                                            :
+                                            (
+                                                empleados.map(empleado => {
+                                                    return(
+                                                    <tr key={empleado.personid} >  
+                                                        <td>{empleado.codeEmployee}</td>
+                                                        <td>{empleado.name} {empleado.lastname}</td>
+                                                        <td>{empleado.workPosition}</td>
+                                                        <td>{empleado.identidad}</td>
+                                                        <td>{empleado.rtn}</td>
+                                                        <td>{empleado.phone1}</td>
+                                                        <td className="text-nowrap text-center">
+                                                            <button
+                                                                data-toggle="tooltip" 
+                                                                className="btn btn-sm btn-warning"
+                                                                data-original-title="Editar"
+                                                                onClick={()=> seleccionarEmpleado(empleado)}
+                                                            ><i className="ti-pencil"></i></button>
+                                                            <button
+                                                                data-toggle="tooltip" 
+                                                                className="btn btn-sm btn-danger"
+                                                                data-original-title="Borrar"
+                                                                onClick={()=>onClickEliminar}
+                                                            ><i className="ti-trash"></i></button>
+                                                        </td>
+                                                    </tr> 
+                                                    )
 
-                                                <Link
-                                                    data-toggle="tooltip" 
-                                                    className="btn btn-sm btn-danger"
-                                                    data-original-title="Borrar"
-                                                ><i className="ti-trash"></i></Link>
-                                            </td>
-                                        </tr>
+                                                })
+                                            )
+                                        }
                                     </tbody>
                                 </table>
                             </div>

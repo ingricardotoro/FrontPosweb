@@ -1,5 +1,4 @@
 import React, {useState, useContext, useEffect } from 'react';
-import {Link, useHistory} from 'react-router-dom';
 
 import AuthContext from '../../Context/autenticacion/authContext';
 import AlertaContext from '../../Context/alertas/alertaContext';
@@ -14,9 +13,9 @@ export default function Login(props){
     const {mensaje, autenticado, iniciarSesion} = authContext;
 
     useEffect(()=>{
-        if(autenticado) return props.history.push('/admin')
-        if(mensaje) mostrarAlerta(mensaje.msg, mensaje.tipoAlerta);
-    }, [autenticado, props.history, mensaje])
+        if(autenticado){ props.history.push('/admin'); } 
+        if(mensaje){ mostrarAlerta(mensaje.msg, mensaje.tipoAlerta); } 
+    },[mensaje, autenticado, props.history, mostrarAlerta])
 
     const [usuario, setUsuario] = useState({
         username: '',
