@@ -26,7 +26,7 @@ const EmpleadoState = props => {
     const obtenerEmpleados = async () => {
         try {
             const response = await Axios.get('employees');
-            console.log(response);
+            console.log('obteniendo empleado ',response);
             dispatch({
                 type: LISTAR_EMPLEADOS,
                 payload: response.data.employees
@@ -40,7 +40,7 @@ const EmpleadoState = props => {
         console.log(empleado)
         try {
             const response = await Axios.post('employees', empleado);
-            console.log(response);
+            console.log('guardando empleado ',response);
             dispatch({
                 type: AGREGAR_EMPLEADO,
                 payload: empleado
@@ -50,7 +50,8 @@ const EmpleadoState = props => {
         }
     }
 
-    const validarEmpleado = ()=>{
+    const validarEmpleado = (empleado)=>{
+        console.log('validacion empleado ',empleado)
         dispatch({
             type: VALIDAR_EMPLEADO
         })

@@ -82,7 +82,7 @@ export default function FormularioEmpleado(){
            location.trim()==='' || codeEmployee.trim()==='' || workLocation.trim()==='' || workPosition.trim()==='' ||
            active.trim()==='')
         {
-            validarEmpleado();
+            validarEmpleado(empleado);
             return;
         }
 
@@ -196,9 +196,9 @@ export default function FormularioEmpleado(){
                                                                 className="form-check-label"
                                                                 name="gender"
                                                                 value="masculino"
+                                                                checked={empleado.gender ==='masculino'}
                                                                 onChange={onChange}
                                                                 id="gridRadios1"
-                                                                checked
                                                             />
                                                             <label htmlFor="" className="form-check-label">Masculino</label>
                                                         </div>
@@ -208,6 +208,7 @@ export default function FormularioEmpleado(){
                                                                 className="form-check-label"
                                                                 name="gender"
                                                                 value="femenino"
+                                                                checked={empleado.gender ==='femenino'}
                                                                 onChange={onChange}
                                                                 id="gridRadios2"
                                                             />
@@ -219,6 +220,7 @@ export default function FormularioEmpleado(){
                                                                 className="form-check-label"
                                                                 name="gender"
                                                                 value="otro"
+                                                                checked={empleado.gender ==='otro'}
                                                                 onChange={onChange}
                                                                 id="gridRadios3"
                                                             />
