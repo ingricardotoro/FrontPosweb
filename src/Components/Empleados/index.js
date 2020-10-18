@@ -6,7 +6,7 @@ import empleadoContext from '../../Context/empleados/empleadoContext';
 export default function Empleados(){
 
     const EmpleadoContext = useContext(empleadoContext);
-    const { empleados, obtenerEmpleados, guardarEmpleadoActual } = EmpleadoContext;
+    const { empleados, obtenerEmpleados, guardarEmpleadoActual, eliminarEmpleado } = EmpleadoContext;
 
     const history = useHistory()
 
@@ -19,8 +19,10 @@ export default function Empleados(){
         history.push('empleados/nuevo')
     }
 
-    const onClickEliminar = () => {
+    const onClickEliminar = empleado => {
         alert('vamos a eliminar ayudaaaaaaaaaa!')
+        eliminarEmpleado(empleado);
+        obtenerEmpleados()
     }
 
     return(
@@ -89,7 +91,7 @@ export default function Empleados(){
                                                                 data-toggle="tooltip" 
                                                                 className="btn btn-sm btn-danger"
                                                                 data-original-title="Borrar"
-                                                                onClick={()=>onClickEliminar}
+                                                                onClick={()=>onClickEliminar(empleado)}
                                                             ><i className="ti-trash"></i></button>
                                                         </td>
                                                     </tr> 

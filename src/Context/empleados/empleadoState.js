@@ -66,6 +66,19 @@ const EmpleadoState = props => {
         }
     }
 
+    const eliminarEmpleado = async empleado => {
+        //console.log('empleado a actualizar ', empleado)
+        try {
+            await Axios.delete(`employees/delete/${empleado._id}`);
+            dispatch({
+                type: ELIMINAR_EMPLEADO,
+                payload: empleado._id
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     const validarEmpleado = () =>{
         dispatch({
@@ -95,6 +108,7 @@ const EmpleadoState = props => {
                 obtenerEmpleados,
                 agregarEmpleado,
                 actualizarEmpleado,
+                eliminarEmpleado,
                 validarEmpleado,
                 guardarEmpleadoActual,
                 limpiarEmpleadoSeleccionado,

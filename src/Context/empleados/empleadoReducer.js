@@ -42,6 +42,12 @@ export default (state, action) => {
                 ...state,
                 empleadoseleccionado: null
             }
+        case ELIMINAR_EMPLEADO:
+            return {
+                ...state,
+                empleados: state.empleados.filter(empleado => empleado._id !== action.payload)
+            }
+
         default:
             return state;
     }
