@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
 import AuthContext from '../../Context/autenticacion/authContext';
 import AlertaContext from '../../Context/alertas/alertaContext';

@@ -1,8 +1,14 @@
 import React, {useState, useContext, useEffect} from 'react';
+import { useHistory } from 'react-router-dom';
 
 import empleadoContext from '../../../Context/empleados/empleadoContext';
+import AlertaContext from '../../../Context/alertas/alertaContext';
 
 export default function FormularioEmpleado(){
+    const history = useHistory()
+
+    const alertaContext = useContext(AlertaContext);
+    const {alerta, mostrarAlerta} = alertaContext;
 
     const [empleado, setEmpleado] = useState({
         personid: -1,
@@ -30,11 +36,64 @@ export default function FormularioEmpleado(){
     })
 
     const EmpleadoContext = useContext(empleadoContext);
-    const {empleadoseleccionado, errorempleado, agregarEmpleado, validarEmpleado} = EmpleadoContext;
+    const {empleadoseleccionado, errorempleado, agregarEmpleado, actualizarEmpleado, validarEmpleado} = EmpleadoContext;
 
     useEffect(()=>{
         if(empleadoseleccionado !== null){
-            setEmpleado(empleadoseleccionado)
+            console.log('empleado seleccionado ',empleadoseleccionado)
+            const empleadoActualizar = {
+                _id: empleadoseleccionado._id,
+                personid: '',
+                name: '',
+                lastname: '',
+                identidad: '',
+                gender: '',
+                rtn: '',
+                fec_nac: '',
+                phone1: '',
+                phone2: '',
+                email: '',
+                country: '',
+                city: '',
+                location:'',
+                website: '',
+                facebook: '',
+                twitter: '',
+                linkedin: '',
+                skype: '',
+                codeEmployee: '',
+                workLocation: '',
+                workPosition: '',
+                active: ''
+            };
+            const {_id, name, lastname, identidad, gender, rtn, fec_nac, phone1, phone2, email, country, city, location, 
+                    website, facebook, twitter, linkedin,skype} = empleadoseleccionado.personid;
+            const {codeEmployee, workLocation, workPosition, active} = empleadoseleccionado;
+            //empleadoActualizar._id = _id
+            empleadoActualizar.personid = _id
+            empleadoActualizar.name = name
+            empleadoActualizar.lastname = lastname
+            empleadoActualizar.identidad = identidad
+            empleadoActualizar.gender = gender
+            empleadoActualizar.rtn = rtn
+            empleadoActualizar.fec_nac = fec_nac
+            empleadoActualizar.phone1 = phone1
+            empleadoActualizar.phone2 = phone2
+            empleadoActualizar.email = email
+            empleadoActualizar.country = country
+            empleadoActualizar.city = city
+            empleadoActualizar.location = location
+            empleadoActualizar.website = website
+            empleadoActualizar.facebook = facebook
+            empleadoActualizar.twitter = twitter
+            empleadoActualizar.linkedin = linkedin
+            empleadoActualizar.skype = skype
+            empleadoActualizar.codeEmployee = codeEmployee
+            empleadoActualizar.workLocation = workLocation
+            empleadoActualizar.workPosition = workPosition
+            empleadoActualizar.active = active
+
+            setEmpleado(empleadoActualizar)
         }else{
             setEmpleado({
                 personid: -1,
@@ -63,9 +122,9 @@ export default function FormularioEmpleado(){
         }
     }, [empleadoseleccionado])
 
-    const {name, lastname, identidad, gender, rtn, fec_nac, phone1, phone2, email, country, city, location, 
-           website, facebook, twitter, linkedin, skype, codeEmployee, workLocation, workPosition, 
-           active} = empleado
+    const {name, lastname, identidad, gender, rtn, fec_nac, phone1, phone2, email, country, city,
+           location, website, facebook, twitter, linkedin, skype, codeEmployee, workLocation, 
+           workPosition, active, personid} = empleado
 
     
     const onChange = e =>{
@@ -79,10 +138,9 @@ export default function FormularioEmpleado(){
         //Validaciones
         if(name.trim()==='' || lastname.trim()==='' || identidad.trim()==='' || gender.trim()==='' || rtn.trim()===''||
            fec_nac.trim()==='' || phone1.trim()==='' || email.trim()==='' || country.trim()==='' || city.trim()==='' ||
-           location.trim()==='' || codeEmployee.trim()==='' || workLocation.trim()==='' || workPosition.trim()==='' ||
-           active.trim()==='')
+           location.trim()==='' || codeEmployee.trim()==='' || workLocation.trim()==='' || workPosition.trim()==='')
         {
-            validarEmpleado(empleado);
+            validarEmpleado();
             return;
         }
 
@@ -90,8 +148,16 @@ export default function FormularioEmpleado(){
         if(empleadoseleccionado === null){
             console.log('empleado form ',empleado);
             agregarEmpleado(empleado);
+            //Redirigimos a la tabla de ver empleados
+            /*setTimeout(()=>{
+                mostrarAlerta('Empleado agrega exitosamente!', 'alert-info alert-dismissible fade show');
+                
+            },3000)*/
+            history.push('/admin/empleados');
+            
         }else{
-            console.log('editar aqui')
+            actualizarEmpleado(empleado);
+            history.push('/admin/empleados');
         }
 
         //Reiniciamos el formulario
@@ -130,6 +196,17 @@ export default function FormularioEmpleado(){
                         <h4 className="card-title">{empleadoseleccionado ? 'Editar Empleado': 'Agregar Empleado'}</h4>
                         <hr/>
                         <div className="errores">
+                        {alerta ?
+                            (
+                                <div className={`alert ${alerta.tipoAlerta}`}>
+                                    {alerta.msg}
+                                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">X</span>
+                                    </button>
+                                </div>
+                            )
+                            : null
+                        }
                             {errorempleado ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
                         </div>
                         <form onSubmit={handleSubmit}>

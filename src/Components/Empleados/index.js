@@ -1,5 +1,5 @@
 import React,  { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import empleadoContext from '../../Context/empleados/empleadoContext';
 
@@ -8,12 +8,15 @@ export default function Empleados(){
     const EmpleadoContext = useContext(empleadoContext);
     const { empleados, obtenerEmpleados, guardarEmpleadoActual } = EmpleadoContext;
 
+    const history = useHistory()
+
     useEffect(()=>{
         obtenerEmpleados();
     }, [obtenerEmpleados])
 
     const seleccionarEmpleado = empleado => {
         guardarEmpleadoActual(empleado);
+        history.push('empleados/nuevo')
     }
 
     const onClickEliminar = () => {

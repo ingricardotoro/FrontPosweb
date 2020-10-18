@@ -9,7 +9,8 @@ import {
     VALIDAR_EMPLEADO,
     ACTUAL_EMPLEADO,
     ACTUALIZAR_EMPLEADO,
-    ELIMINAR_EMPLEADO
+    ELIMINAR_EMPLEADO,
+    LIMPIAR_EMPLEADO_SELECCIONADO
 } from '../../types';
 
 import Axios from '../../config/axios';
@@ -26,7 +27,7 @@ const EmpleadoState = props => {
     const obtenerEmpleados = async () => {
         try {
             const response = await Axios.get('employees');
-            console.log('obteniendo empleado ',response);
+            //console.log('obteniendo empleado ',response);
             dispatch({
                 type: LISTAR_EMPLEADOS,
                 payload: response.data.employees
@@ -41,6 +42,7 @@ const EmpleadoState = props => {
         try {
             const response = await Axios.post('employees', empleado);
             console.log('guardando empleado ',response);
+            
             dispatch({
                 type: AGREGAR_EMPLEADO,
                 payload: empleado
@@ -50,8 +52,22 @@ const EmpleadoState = props => {
         }
     }
 
-    const validarEmpleado = (empleado)=>{
-        console.log('validacion empleado ',empleado)
+    const actualizarEmpleado = async empleado => {
+        //console.log('empleado a actualizar ', empleado)
+        try {
+            const response = await Axios.put(`employees/update/${empleado._id}`, empleado);
+            console.log(response);
+            dispatch({
+                type: ACTUALIZAR_EMPLEADO,
+                payload: response.data.empleadoActualizado
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    const validarEmpleado = () =>{
         dispatch({
             type: VALIDAR_EMPLEADO
         })
@@ -64,6 +80,12 @@ const EmpleadoState = props => {
         })
     }
 
+    const limpiarEmpleadoSeleccionado = () =>{
+        dispatch({
+            type: LIMPIAR_EMPLEADO_SELECCIONADO
+        })
+    }
+
     return(
         <empleadoContext.Provider
             value={{
@@ -72,8 +94,10 @@ const EmpleadoState = props => {
                 empleadoseleccionado: state.empleadoseleccionado,
                 obtenerEmpleados,
                 agregarEmpleado,
+                actualizarEmpleado,
                 validarEmpleado,
-                guardarEmpleadoActual
+                guardarEmpleadoActual,
+                limpiarEmpleadoSeleccionado,
             }}
         >
             {props.children}

@@ -4,7 +4,8 @@ import {
     VALIDAR_EMPLEADO,
     ACTUAL_EMPLEADO,
     ACTUALIZAR_EMPLEADO,
-    ELIMINAR_EMPLEADO
+    ELIMINAR_EMPLEADO,
+    LIMPIAR_EMPLEADO_SELECCIONADO
 } from '../../types';
 
 export default (state, action) => {
@@ -36,7 +37,7 @@ export default (state, action) => {
                 empleado: state.empleados.map(empleado=>empleado._id === action.payload._id ? action.payload : empleado)
             }
         
-        case ELIMINAR_EMPLEADO:
+        case LIMPIAR_EMPLEADO_SELECCIONADO:
             return {
                 ...state,
                 empleadoseleccionado: null
