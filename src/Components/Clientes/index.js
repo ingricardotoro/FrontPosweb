@@ -2,41 +2,41 @@ import React,  { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import empleadoContext from '../../Context/empleados/empleadoContext';
+import clienteContext from '../../Context/clientes/clienteContext';
 
 export default function Empleados(){
 
-    const EmpleadoContext = useContext(empleadoContext);
-    const { empleados, obtenerEmpleados, guardarEmpleadoActual, eliminarEmpleado, buscarEmpleado } = EmpleadoContext;
+    const ClienteContext = useContext(clienteContext);
+    const { clientes, obtenerClientes, guardarClienteActual, eliminarCliente, buscarCliente } = ClienteContext;
 
     const [termino, setTermino] = useState();
 
     const history = useHistory()
 
     useEffect(()=>{
-        obtenerEmpleados();
-    }, [obtenerEmpleados])
+        obtenerClientes();
+    }, [obtenerClientes])
 
-    const seleccionarEmpleado = empleado => {
-        guardarEmpleadoActual(empleado);
-        history.push('empleados/nuevo')
+    const seleccionarCliente = cliente => {
+        guardarClienteActual(cliente);
+        history.push('clientes/nuevo')
     }
 
-    const onClickEliminar = empleado => {
+    const onClickEliminar = cliente => {
         alert('vamos a eliminar ayudaaaaaaaaaa!')
-        eliminarEmpleado(empleado);
-        obtenerEmpleados()
+        eliminarEmpleado(cliente);
+        obtenerClientes();
     }
 
     const handleSearch = () => {
         
-        let empleadoBuscar = termino.trim().toLowerCase()
+        let clienteBuscar = termino.trim().toLowerCase()
 
-        if(empleadoBuscar.length === 0){
+        if(clienteBuscar.length === 0){
             return empleados;
         }
 
-        buscarEmpleado(empleadoBuscar)
+        buscarCliente(clienteBuscar)
 
     }
 
@@ -70,13 +70,13 @@ export default function Empleados(){
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-8">
-                                    <h4 className="card-title">Empleados( {empleados.length} )</h4>
+                                    <h4 className="card-title">Clientes( {clientes.length} )</h4>
                                 </div>
                                 <div className="col-4 mb-2">
                                     <div className="text-right">
-                                        <Link className="btn btn-primary" to='/admin/empleados/nuevo'>
+                                        <Link className="btn btn-primary" to='/admin/clientes/nuevo'>
                                             <span className="pcoded-micon"><i className="ti-user"></i></span>
-                                            <span className="pcoded-mtext p-2">Crear Empleado</span>
+                                            <span className="pcoded-mtext p-2">Crear Cliente</span>
                                         </Link>
                                         <button className="btn btn-primary m-2"
                                                 data-toggle="modal"
@@ -92,43 +92,42 @@ export default function Empleados(){
                                 <table className="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>COD. Empleado</th>
+                                            <th>COD. Cliente</th>
                                             <th>Nombre</th>
-                                            <th>Cargo</th>
                                             <th>No.Identidad</th>
-                                            <th>RTN</th>
-                                            <th>Telefono</th>
+                                            <th>Credito Activo</th>
+                                            <th>Limite de Credito</th>
+                                            <th>Nivel de precio</th>
                                             <th className="w100 text-nowrap">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {
-                                            empleados.length === 0
+                                            clientes.length === 0
                                             ?
-                                            <tr>No hay empleados</tr>
+                                            <tr>No hay clientes</tr>
                                             :
                                             (
-                                                empleados.map(empleado => {
+                                                clientes.map(cliente => {
                                                     return(
-                                                    <tr key={empleado._id} >  
-                                                        <td>{empleado.codeEmployee}</td>
-                                                        <td>{empleado.personid.name} {empleado.personid.lastname}</td>
-                                                        <td>{empleado.workPosition}</td>
-                                                        <td>{empleado.personid.identidad}</td>
-                                                        <td>{empleado.personid.rtn}</td>
-                                                        <td>{empleado.personid.phone1}</td>
+                                                    <tr key={cliente._id} >  
+                                                        <td>{cliente.customerCode}</td>
+                                                        <td>{cliente.personid.name} {cliente.personid.lastname}</td>
+                                                        <td>{cliente.creditActive}</td>
+                                                        <td>{cliente.creditLimit}</td>
+                                                        <td>{cliente.levelprice}</td>
                                                         <td className="text-nowrap text-center">
                                                             <button
                                                                 data-toggle="tooltip" 
                                                                 className="btn btn-sm btn-warning"
                                                                 data-original-title="Editar"
-                                                                onClick={()=> seleccionarEmpleado(empleado)}
+                                                                onClick={()=> seleccionarCliente(cliente)}
                                                             ><i className="ti-pencil"></i></button>
                                                             <button
                                                                 data-toggle="tooltip" 
                                                                 className="btn btn-sm btn-danger"
                                                                 data-original-title="Borrar"
-                                                                onClick={()=>onClickEliminar(empleado)}
+                                                                onClick={()=>onClickEliminar(cliente)}
                                                             ><i className="ti-trash"></i></button>
                                                         </td>
                                                     </tr> 
@@ -174,20 +173,20 @@ export default function Empleados(){
                                     </thead>
                                     <tbody>
                                         {
-                                            empleados.length === 0
+                                            clientes.length === 0
                                             ?
-                                            <tr>No hay empleados</tr>
+                                            <tr>No hay clientes</tr>
                                             :
                                             (
-                                                empleados.map((empleado, i) => {
+                                                clientes.map((cliente, i) => {
                                                     return(
                                                     <tr key={i} >  
-                                                        <td>+504{empleado.personid.phone2}</td>
-                                                        <td>{empleado.personid.fec_nac}</td>
-                                                        <td>{empleado.personid.email} </td>
-                                                        <td>{empleado.personid.country}</td>
-                                                        <td>{empleado.personid.city}</td>
-                                                        <td>{empleado.personid.location}</td>
+                                                        <td>+504{cliente.personid.phone2}</td>
+                                                        <td>{cliente.personid.fec_nac}</td>
+                                                        <td>{cliente.personid.email} </td>
+                                                        <td>{cliente.personid.country}</td>
+                                                        <td>{cliente.personid.city}</td>
+                                                        <td>{cliente.personid.location}</td>
                                                     </tr> 
                                                     )
                                                 })

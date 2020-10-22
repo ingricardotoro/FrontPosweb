@@ -1,8 +1,8 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 
-import empleadoContext from '../../../Context/empleados/empleadoContext';
-import AlertaContext from '../../../Context/alertas/alertaContext';
+import clienteContext from '../../../Context/clientes/clienteContext';
+//import AlertaContext from '../../../Context/alertas/alertaContext';
 
 export default function FormularioEmpleado(){
     const history = useHistory()
@@ -10,7 +10,7 @@ export default function FormularioEmpleado(){
     //const alertaContext = useContext(AlertaContext);
     //const {alerta, mostrarAlerta} = alertaContext;
 
-    const [empleado, setEmpleado] = useState({
+    const [cliente, setCliente] = useState({
         personid: -1,
         name: '',
         lastname: '',
@@ -29,20 +29,22 @@ export default function FormularioEmpleado(){
         twitter: '',
         linkedin: '',
         skype: '',
-        codeEmployee: '',
-        workLocation: '',
-        workPosition: '',
+        customerCode: '',
+        payIVA: '',
+        creditActive: '',
+        creditLimit: '',
+        levelPrice: '',
         active: ''
     })
 
-    const EmpleadoContext = useContext(empleadoContext);
-    const {empleadoseleccionado, errorempleado, agregarEmpleado, actualizarEmpleado, validarEmpleado} = EmpleadoContext;
+    const ClienteContext = useContext(clienteContext);
+    const {clienteseleccionado, errorcliente, agregarCliente, actualizarCliente, validarCliente} = ClienteContext;
 
     useEffect(()=>{
-        if(empleadoseleccionado !== null){
-            console.log('empleado seleccionado ',empleadoseleccionado)
-            const empleadoActualizar = {
-                _id: empleadoseleccionado._id,
+        if(clienteseleccionado !== null){
+            console.log('cliente seleccionado ',clienteseleccionado)
+            const clienteActualizar = {
+                _id: clienteseleccionado._id,
                 personid: '',
                 name: '',
                 lastname: '',
@@ -61,39 +63,43 @@ export default function FormularioEmpleado(){
                 twitter: '',
                 linkedin: '',
                 skype: '',
-                codeEmployee: '',
-                workLocation: '',
-                workPosition: '',
+                customerCode: '',
+                payIVA: '',
+                creditActive: '',
+                creditLimit: '',
+                levelPrice: '',
                 active: ''
             };
             const {_id, name, lastname, identidad, gender, rtn, fec_nac, phone1, phone2, email, country, city, location, 
-                    website, facebook, twitter, linkedin,skype} = empleadoseleccionado.personid;
-            const {codeEmployee, workLocation, workPosition, active} = empleadoseleccionado;
+                    website, facebook, twitter, linkedin,skype} = clienteseleccionado.personid;
+            const {customerCode, payIVA, creditActive, creditLimit, levelPrice, active} = clienteseleccionado;
             
-            empleadoActualizar.personid = _id
-            empleadoActualizar.name = name
-            empleadoActualizar.lastname = lastname
-            empleadoActualizar.identidad = identidad
-            empleadoActualizar.gender = gender
-            empleadoActualizar.rtn = rtn
-            empleadoActualizar.fec_nac = fec_nac
-            empleadoActualizar.phone1 = phone1
-            empleadoActualizar.phone2 = phone2
-            empleadoActualizar.email = email
-            empleadoActualizar.country = country
-            empleadoActualizar.city = city
-            empleadoActualizar.location = location
-            empleadoActualizar.website = website
-            empleadoActualizar.facebook = facebook
-            empleadoActualizar.twitter = twitter
-            empleadoActualizar.linkedin = linkedin
-            empleadoActualizar.skype = skype
-            empleadoActualizar.codeEmployee = codeEmployee
-            empleadoActualizar.workLocation = workLocation
-            empleadoActualizar.workPosition = workPosition
-            empleadoActualizar.active = active
+            clienteActualizar.personid = _id
+            clienteActualizar.name = name
+            clienteActualizar.lastname = lastname
+            clienteActualizar.identidad = identidad
+            clienteActualizar.gender = gender
+            clienteActualizar.rtn = rtn
+            clienteActualizar.fec_nac = fec_nac
+            clienteActualizar.phone1 = phone1
+            clienteActualizar.phone2 = phone2
+            clienteActualizar.email = email
+            clienteActualizar.country = country
+            clienteActualizar.city = city
+            clienteActualizar.location = location
+            clienteActualizar.website = website
+            clienteActualizar.facebook = facebook
+            clienteActualizar.twitter = twitter
+            clienteActualizar.linkedin = linkedin
+            clienteActualizar.skype = skype
+            clienteActualizar.customerCode = customerCode
+            clienteActualizar.payIVA = payIVA
+            clienteActualizar.creditActive = creditActive
+            clienteActualizar.creditLimit = creditLimit
+            clienteActualizar.levelPrice = levelPrice
+            clienteActualizar.active = active
 
-            setEmpleado(empleadoActualizar)
+            setCliente(clienteActualizar)
         }else{
             setEmpleado({
                 personid: -1,
@@ -114,22 +120,24 @@ export default function FormularioEmpleado(){
                 twitter: '',
                 linkedin: '',
                 skype: '',
-                codeEmployee: '',
-                workLocation: '',
-                workPosition: '',
+                customerCode: '',
+                payIVA: '',
+                creditActive: '',
+                creditLimit: '',
+                levelPrice: '',
                 active: ''
             })
         }
-    }, [empleadoseleccionado])
+    }, [clienteseleccionado])
 
     const {name, lastname, identidad, gender, rtn, fec_nac, phone1, phone2, email, country, city,
-           location, website, facebook, twitter, linkedin, skype, codeEmployee, workLocation, 
-           workPosition, active} = empleado
+           location, website, facebook, twitter, linkedin, skype, customerCode, payIVA, creditActive,
+           creditLimit,levelPrice, active} = cliente
 
     
     const onChange = e =>{
-        setEmpleado({
-            ...empleado,
+        setCliente({
+            ...cliente,
             [e.target.name]: e.target.value
         })
     }
@@ -139,36 +147,41 @@ export default function FormularioEmpleado(){
         //Validaciones
         if(name.trim()==='' || lastname.trim()==='' || identidad.trim()==='' || gender.trim()==='' || rtn.trim()===''||
            fec_nac.trim()==='' || phone1.trim()==='' || email.trim()==='' || country.trim()==='' || city.trim()==='' ||
-           location.trim()==='' || codeEmployee.trim()==='' || workLocation.trim()==='' || workPosition.trim()==='')
+           location.trim()==='' || customerCode.trim()==='' || creditLimit.trim()==='' || levelPrice.trim()==='')
         {
-            validarEmpleado();
+            validarCliente();
             return;
         }
 
-        if(errorempleado){
-
+        if(payIVA){
+            validarCliente();
+            return;
+        }
+        if(creditActive){
+            validarCliente();
+            return;
         }
         
         console.log(active)
 
         //Comprobamos si es agregar o editar
-        if(empleadoseleccionado === null){
-            console.log('empleado form ',empleado);
-            agregarEmpleado(empleado);
+        if(clienteseleccionado === null){
+            console.log('cliente form ',cliente);
+            agregarCliente(cliente);
             //Redirigimos a la tabla de ver empleados
             /*setTimeout(()=>{
                 mostrarAlerta('Empleado agrega exitosamente!', 'alert-info alert-dismissible fade show');
                 
             },3000)*/
-            history.push('/admin/empleados');
+            history.push('/admin/clientes');
             
         }else{
-            actualizarEmpleado(empleado);
-            history.push('/admin/empleados');
+            actualizarCliente(cliente);
+            history.push('/admin/clientes');
         }
 
         //Reiniciamos el formulario
-        setEmpleado({
+        setCliente({
             personid: -1,
             name: '',
             lastname: '',
@@ -187,9 +200,11 @@ export default function FormularioEmpleado(){
             twitter: '',
             linkedin: '',
             skype: '',
-            codeEmployee: '',
-            workLocation: '',
-            workPosition: '',
+            customerCode: '',
+            payIVA: '',
+            creditActive: '',
+            creditLimit: '',
+            levelPrice: '',
             active: ''
         })
     }
@@ -200,10 +215,10 @@ export default function FormularioEmpleado(){
             <div className="col-md-10">
                 <div className="card">
                     <div className="card-body">
-                        <h4 className="card-title">{empleadoseleccionado ? 'Editar Empleado': 'Agregar Empleado'}</h4>
+                        <h4 className="card-title">{clienteseleccionado ? 'Editar Cliente': 'Agregar Cliente'}</h4>
                         <hr/>
                         <div className="errores">
-                            {errorempleado ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
+                            {errorcliente ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
                         </div>
                         
                         <form onSubmit={handleSubmit}>
@@ -453,34 +468,34 @@ export default function FormularioEmpleado(){
                                 <div className="col-md-6">
                                     <div className="card">
                                         <div className="card-body">
-                                            <h4 className="card-title">Datos de Empleado</h4>
+                                            <h4 className="card-title">Datos de Cliente</h4>
                                             <hr/>
                                             <div className="form-group col-md-12">
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
                                                     name="codeEmployee"
-                                                    value={codeEmployee}
+                                                    value={customerCode}
                                                     onChange={onChange}
-                                                    placeholder="Código de Empleado"/>
+                                                    placeholder="Código de Cliente"/>
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
-                                                    name="workPosition"
-                                                    value={workPosition}
+                                                    name="creditActive"
+                                                    value={creditActive}
                                                     onChange={onChange}
-                                                    placeholder="Cargo, Posición de trabajo"/>
+                                                    placeholder="Credito Activo"/>
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
-                                                    name="workLocation"
-                                                    value={workLocation}
+                                                    name="creditLimit"
+                                                    value={creditLimit}
                                                     onChange={onChange} 
-                                                    placeholder="Direccion"/>
+                                                    placeholder="Credito Limite"/>
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <div className="switch switch-primary d-inline m-r-10">
@@ -497,7 +512,7 @@ export default function FormularioEmpleado(){
                                 <div className="offset-sm-8 col-sm-10">
                                     <button type="submit" className="btn btn-primary">
                                         <i className="ti-save p-2"></i>
-                                        {empleadoseleccionado ? 'Editar Empleado': 'Agregar Empleado'}
+                                        {clienteseleccionado ? 'Editar Cliente': 'Agregar Cliente'}
                                     </button>
                                 </div>
                             </div>

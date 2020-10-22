@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import AlertaState from './Context/alertas/alertaState';
 import AuthState from './Context/autenticacion/authState';
 import EmpleadoState from './Context/empleados/empleadoState';
+import ClienteState from './Context/clientes/clienteState';
 
 //Pages 
 import Home from 'Pages/Home';
@@ -14,6 +15,7 @@ function App() {
   return (
     <>
     <EmpleadoState>
+    <ClienteState>
       <AlertaState>
         <AuthState>
           <Router>
@@ -24,6 +26,7 @@ function App() {
           </Router>  
         </AuthState>
       </AlertaState>
+    </ClienteState>
     </EmpleadoState>
     </>
   );

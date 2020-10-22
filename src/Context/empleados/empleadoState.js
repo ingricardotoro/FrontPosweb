@@ -10,6 +10,7 @@ import {
     ACTUAL_EMPLEADO,
     ACTUALIZAR_EMPLEADO,
     ELIMINAR_EMPLEADO,
+    BUSCAR_EMPLEADO,
     LIMPIAR_EMPLEADO_SELECCIONADO
 } from '../../types';
 
@@ -38,10 +39,10 @@ const EmpleadoState = props => {
     }
     
     const agregarEmpleado = async empleado => {
-        console.log(empleado)
+        //console.log(empleado)
         try {
             const response = await Axios.post('employees', empleado);
-            console.log('guardando empleado ',response);
+            //console.log('guardando empleado ',response);
             
             dispatch({
                 type: AGREGAR_EMPLEADO,
@@ -56,7 +57,7 @@ const EmpleadoState = props => {
         //console.log('empleado a actualizar ', empleado)
         try {
             const response = await Axios.put(`employees/update/${empleado._id}`, empleado);
-            console.log(response);
+            //console.log(response);
             dispatch({
                 type: ACTUALIZAR_EMPLEADO,
                 payload: response.data.empleadoActualizado
@@ -79,6 +80,13 @@ const EmpleadoState = props => {
         }
     }
 
+    const buscarEmpleado = async termino => {
+        
+        dispatch({
+            type: BUSCAR_EMPLEADO,
+            payload: termino
+        })
+    }
 
     const validarEmpleado = () =>{
         dispatch({
@@ -109,6 +117,7 @@ const EmpleadoState = props => {
                 agregarEmpleado,
                 actualizarEmpleado,
                 eliminarEmpleado,
+                buscarEmpleado,
                 validarEmpleado,
                 guardarEmpleadoActual,
                 limpiarEmpleadoSeleccionado,
