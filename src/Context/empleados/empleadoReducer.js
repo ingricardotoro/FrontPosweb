@@ -16,6 +16,12 @@ export default (state, action) => {
                 ...state,
                 empleados: action.payload
             }
+        
+        case BUSCAR_EMPLEADO:
+            return {
+                ...state,
+                empleados: action.payload
+            }
         case AGREGAR_EMPLEADO:
             return {
                 ...state,

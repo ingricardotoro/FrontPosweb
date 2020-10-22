@@ -24,7 +24,7 @@ export default function Empleados(){
 
     const onClickEliminar = cliente => {
         alert('vamos a eliminar ayudaaaaaaaaaa!')
-        eliminarEmpleado(cliente);
+        eliminarCliente(cliente);
         obtenerClientes();
     }
 
@@ -33,7 +33,7 @@ export default function Empleados(){
         let clienteBuscar = termino.trim().toLowerCase()
 
         if(clienteBuscar.length === 0){
-            return empleados;
+            return clientes;
         }
 
         buscarCliente(clienteBuscar)
@@ -53,7 +53,7 @@ export default function Empleados(){
                                 <input 
                                     type="text"
                                     className="form-control"
-                                    placeholder="Buscar empleado..."
+                                    placeholder="Buscar cliente..."
                                     name="termino"
                                     value={termino}
                                     onChange={e=> setTermino(e.target.value)}
@@ -74,11 +74,11 @@ export default function Empleados(){
                                 </div>
                                 <div className="col-4 mb-2">
                                     <div className="text-right">
-                                        <Link className="btn btn-primary" to='/admin/clientes/nuevo'>
+                                        <Link className="btn btn-sm btn-primary m-2" to='/admin/clientes/nuevo'>
                                             <span className="pcoded-micon"><i className="ti-user"></i></span>
-                                            <span className="pcoded-mtext p-2">Crear Cliente</span>
+                                            <span className="pcoded-mtext p-2">Agregar</span>
                                         </Link>
-                                        <button className="btn btn-primary m-2"
+                                        <button className="btn btn-sm btn-primary m-2"
                                                 data-toggle="modal"
                                                 data-target="#modalVerMas"
                                         >

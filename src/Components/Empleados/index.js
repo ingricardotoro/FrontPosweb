@@ -28,17 +28,17 @@ export default function Empleados(){
         obtenerEmpleados()
     }
 
-    const handleSearch = () => {
-        
-        let empleadoBuscar = termino.trim().toLowerCase()
-
-        if(empleadoBuscar.length === 0){
-            return empleados;
+    /*const handleSearch = (e, empleados)=>{
+        setTermino(e.target.value)
+        if(termino !== undefined){
+            let empleadoBuscar = termino.toLowerCase()
+            if(empleadoBuscar.length === 0){
+                return empleados;
+            }
+            buscarEmpleado(termino, empleados)
         }
 
-        buscarEmpleado(empleadoBuscar)
-
-    }
+    }*/
 
     return(
         <>
@@ -57,7 +57,6 @@ export default function Empleados(){
                                     name="termino"
                                     value={termino}
                                     onChange={e=> setTermino(e.target.value)}
-                                    onKeyUp={()=>handleSearch()}
                                 />
                             </div>
                         </div>

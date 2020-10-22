@@ -46,7 +46,7 @@ const EmpleadoState = props => {
             
             dispatch({
                 type: AGREGAR_EMPLEADO,
-                payload: empleado
+                payload: response.data.employees
             })
         } catch (error) {
             console.log(error);
@@ -80,11 +80,16 @@ const EmpleadoState = props => {
         }
     }
 
-    const buscarEmpleado = async termino => {
+    const buscarEmpleado = async (termino, empleados) => {
+        
+        empleados.filter(empleado=>
+            empleado.personid.name.toLowerCase().indexOf(termino) > -1 ||
+            empleado.personid.lastname.toLowerCase().indexOf(termino) > -1
+        )
         
         dispatch({
             type: BUSCAR_EMPLEADO,
-            payload: termino
+            payload: empleados
         })
     }
 

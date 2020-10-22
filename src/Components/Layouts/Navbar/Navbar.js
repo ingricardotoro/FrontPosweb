@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
 
 import logo from './logo.png';
 import userImg from '../Header/user_default.png';
 
+import AuthContext from '../../../Context/autenticacion/authContext';
+
 export default function Navbar(){
+    
+    const authContext = useContext(AuthContext);
+    const {autenticado, usuario} = authContext;
+
     return (
         <header className="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
             <div className="m-header">
@@ -25,10 +31,19 @@ export default function Navbar(){
                             </Link>
                             <div className="dropdown-menu dropdown-menu-right profile-notification">
                                 <div className="pro-head">
-                                    <img src={userImg} alt="user-default" className="rounded-circle"/>
-                                    <span>Nombre</span>
-                                    <Link to="#!" className="dud-logout" title="Logout"><i className="ti-lock"></i></Link>
-                                </div>
+                                    {
+                                    autenticado ?
+                                    (
+                                        <>
+                                        <img src={userImg} alt="user-default" className="rounded-circle"/>
+                                        <span>{usuario.username}</span>
+                                        <Link to="#!" className="dud-logout" title="Logout"><i className="ti-lock"></i></Link>
+                                        </>
+                                    )
+                                    : 
+                                    null
+                                    }
+                                    </div>
                                 <ul className="pro-body">
                                     <li><Link to="#!" className="dropdown-item"><i className="ti-user"></i>Perfil</Link></li>
                                     <li><Link to="#!" className="dropdown-item"><i className="ti-lock"></i>Cerrar Sesion</Link></li>

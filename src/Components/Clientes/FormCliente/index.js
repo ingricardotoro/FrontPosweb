@@ -101,7 +101,7 @@ export default function FormularioEmpleado(){
 
             setCliente(clienteActualizar)
         }else{
-            setEmpleado({
+            setCliente({
                 personid: -1,
                 name: '',
                 lastname: '',
@@ -285,7 +285,7 @@ export default function FormularioEmpleado(){
                                                                 className="form-check-label"
                                                                 name="gender"
                                                                 value="masculino"
-                                                                checked={empleado.gender ==='masculino'}
+                                                                checked={cliente.gender ==='masculino'}
                                                                 onChange={onChange}
                                                                 id="gridRadios1"
                                                             />
@@ -297,7 +297,7 @@ export default function FormularioEmpleado(){
                                                                 className="form-check-label"
                                                                 name="gender"
                                                                 value="femenino"
-                                                                checked={empleado.gender ==='femenino'}
+                                                                checked={cliente.gender ==='femenino'}
                                                                 onChange={onChange}
                                                                 id="gridRadios2"
                                                             />
@@ -309,7 +309,7 @@ export default function FormularioEmpleado(){
                                                                 className="form-check-label"
                                                                 name="gender"
                                                                 value="otro"
-                                                                checked={empleado.gender ==='otro'}
+                                                                checked={cliente.gender ==='otro'}
                                                                 onChange={onChange}
                                                                 id="gridRadios3"
                                                             />

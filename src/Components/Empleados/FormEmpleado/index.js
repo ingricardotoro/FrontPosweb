@@ -2,7 +2,7 @@ import React, {useState, useContext, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import empleadoContext from '../../../Context/empleados/empleadoContext';
-import AlertaContext from '../../../Context/alertas/alertaContext';
+//import AlertaContext from '../../../Context/alertas/alertaContext';
 
 export default function FormularioEmpleado(){
     const history = useHistory()
