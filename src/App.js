@@ -6,6 +6,7 @@ import AlertaState from './Context/alertas/alertaState';
 import AuthState from './Context/autenticacion/authState';
 import EmpleadoState from './Context/empleados/empleadoState';
 import ClienteState from './Context/clientes/clienteState';
+import ProveedorState from './Context/proveedores/proveedorState';
 
 //Pages 
 import Home from 'Pages/Home';
@@ -16,6 +17,7 @@ function App() {
     <>
     <EmpleadoState>
     <ClienteState>
+    <ProveedorState> 
       <AlertaState>
         <AuthState>
           <Router>
@@ -26,6 +28,7 @@ function App() {
           </Router>  
         </AuthState>
       </AlertaState>
+    </ProveedorState>
     </ClienteState>
     </EmpleadoState>
     </>
