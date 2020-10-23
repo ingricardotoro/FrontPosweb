@@ -14,7 +14,7 @@ import {
     LIMPIAR_CLIENTE_SELECCIONADO
 } from '../../types';
 
-//import Axios from '../../config/axios';
+import Axios from '../../config/axios';
 
 const ClienteState = props => {
     const initalState = {
@@ -27,11 +27,11 @@ const ClienteState = props => {
 
     const obtenerClientes = async () => {
         try {
-            //const response = await Axios.get('clients');
-            //console.log('obteniendo empleado ',response);
+            const response = await Axios.get('customers');
+            console.log('obteniendo empleado ',response);
             dispatch({
                 type: LISTAR_CLIENTES,
-                payload: "" //response.data.clients
+                payload: response.data.customers
             })
         } catch (error) {
             console.log(error);
@@ -39,10 +39,10 @@ const ClienteState = props => {
     }
     
     const agregarCliente = async cliente => {
-        console.log(cliente)
+        console.log('cliente form ', cliente)
         try {
-            //const response = await Axios.post('clients', cliente);
-           // console.log('guardando cliente ',response);
+            const response = await Axios.post('customers', cliente);
+           console.log('guardando cliente ',response);
             
             dispatch({
                 type: AGREGAR_CLIENTE,
@@ -56,11 +56,11 @@ const ClienteState = props => {
     const actualizarCliente = async cliente => {
         console.log('cliente a actualizar ', cliente)
         try {
-            //const response = await Axios.put(`employees/update/${cliente._id}`, cliente);
-            //console.log(response);
+            const response = await Axios.put(`customers/update/${cliente._id}`, cliente);
+            console.log(response);
             dispatch({
                 type: ACTUALIZAR_CLIENTE,
-                payload: cliente //response.data.clienteactualizado
+                payload: response.data.clienteActualizado
             })
         } catch (error) {
             console.log(error);
@@ -68,9 +68,9 @@ const ClienteState = props => {
     }
 
     const eliminarCliente = async cliente => {
-        //console.log('cliente a eliminar ', cliente)
+        console.log('cliente a eliminar ', cliente)
         try {
-            //await Axios.delete(`employees/delete/${cliente._id}`);
+            await Axios.delete(`customers/delete/${cliente._id}`);
             dispatch({
                 type: ELIMINAR_CLIENTE,
                 payload: cliente._id

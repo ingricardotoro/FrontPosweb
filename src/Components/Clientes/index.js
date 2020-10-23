@@ -111,11 +111,12 @@ export default function Empleados(){
                                                 clientes.map(cliente => {
                                                     return(
                                                     <tr key={cliente._id} >  
-                                                        <td>{cliente.customerCode}</td>
+                                                        <td>{cliente.codeCustomer}</td>
                                                         <td>{cliente.personid.name} {cliente.personid.lastname}</td>
-                                                        <td>{cliente.creditActive}</td>
+                                                        <td>{cliente.personid.identidad}</td>
+                                                        <td>{cliente.creditActive ? "Si": "No"}</td>
                                                         <td>{cliente.creditLimit}</td>
-                                                        <td>{cliente.levelprice}</td>
+                                                        <td>{cliente.levelPrice}</td>
                                                         <td className="text-nowrap text-center">
                                                             <button
                                                                 data-toggle="tooltip" 
@@ -162,7 +163,7 @@ export default function Empleados(){
                             <table className="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Telefono 2</th>
+                                            <th>Telefono</th>
                                             <th>Fecha Nacimiento</th>
                                             <th>Email</th>
                                             <th>País</th>

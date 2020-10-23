@@ -7,7 +7,7 @@ import empleadoContext from '../../Context/empleados/empleadoContext';
 export default function Empleados(){
 
     const EmpleadoContext = useContext(empleadoContext);
-    const { empleados, obtenerEmpleados, guardarEmpleadoActual, eliminarEmpleado, buscarEmpleado } = EmpleadoContext;
+    const { empleados, obtenerEmpleados, guardarEmpleadoActual, eliminarEmpleado } = EmpleadoContext;
 
     const [termino, setTermino] = useState();
 
@@ -28,17 +28,14 @@ export default function Empleados(){
         obtenerEmpleados()
     }
 
-    /*const handleSearch = (e, empleados)=>{
-        setTermino(e.target.value)
-        if(termino !== undefined){
-            let empleadoBuscar = termino.toLowerCase()
-            if(empleadoBuscar.length === 0){
-                return empleados;
-            }
-            buscarEmpleado(termino, empleados)
-        }
-
-    }*/
+    /*
+    if(termino!==undefined && termino.length > 0){
+        empleados = empleados.filter(empleado=>
+            //console.log(empleado)
+            empleado.name.toLowerCase().indexOf(termino.toLowerCase()) > -1
+        )
+    }
+    */
 
     return(
         <>
@@ -73,11 +70,11 @@ export default function Empleados(){
                                 </div>
                                 <div className="col-4 mb-2">
                                     <div className="text-right">
-                                        <Link className="btn btn-primary" to='/admin/empleados/nuevo'>
+                                        <Link className="btn btn-sm btn-primary" to='/admin/empleados/nuevo'>
                                             <span className="pcoded-micon"><i className="ti-user"></i></span>
-                                            <span className="pcoded-mtext p-2">Crear Empleado</span>
+                                            <span className="pcoded-mtext p-2">Agregar</span>
                                         </Link>
-                                        <button className="btn btn-primary m-2"
+                                        <button className="btn btn-sm btn-primary m-2"
                                                 data-toggle="modal"
                                                 data-target="#modalVerMas"
                                         >

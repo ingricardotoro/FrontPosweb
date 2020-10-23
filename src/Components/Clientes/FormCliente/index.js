@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import clienteContext from '../../../Context/clientes/clienteContext';
 //import AlertaContext from '../../../Context/alertas/alertaContext';
 
-export default function FormularioEmpleado(){
+export default function FormularioCliente(){
     const history = useHistory()
 
     //const alertaContext = useContext(AlertaContext);
@@ -29,10 +29,9 @@ export default function FormularioEmpleado(){
         twitter: '',
         linkedin: '',
         skype: '',
-        customerCode: '',
-        payIVA: '',
-        creditActive: '',
-        creditLimit: '',
+        codeCustomer: '',
+        payIVA: false,
+        creditLimit: 0,
         levelPrice: '',
         active: ''
     })
@@ -63,16 +62,15 @@ export default function FormularioEmpleado(){
                 twitter: '',
                 linkedin: '',
                 skype: '',
-                customerCode: '',
-                payIVA: '',
-                creditActive: '',
-                creditLimit: '',
+                codeCustomer: '',
+                payIVA: false,
+                creditLimit: 0,
                 levelPrice: '',
                 active: ''
             };
             const {_id, name, lastname, identidad, gender, rtn, fec_nac, phone1, phone2, email, country, city, location, 
                     website, facebook, twitter, linkedin,skype} = clienteseleccionado.personid;
-            const {customerCode, payIVA, creditActive, creditLimit, levelPrice, active} = clienteseleccionado;
+            const {codeCustomer, payIVA, creditLimit, levelPrice, active} = clienteseleccionado;
             
             clienteActualizar.personid = _id
             clienteActualizar.name = name
@@ -92,9 +90,8 @@ export default function FormularioEmpleado(){
             clienteActualizar.twitter = twitter
             clienteActualizar.linkedin = linkedin
             clienteActualizar.skype = skype
-            clienteActualizar.customerCode = customerCode
+            clienteActualizar.codeCustomer = codeCustomer
             clienteActualizar.payIVA = payIVA
-            clienteActualizar.creditActive = creditActive
             clienteActualizar.creditLimit = creditLimit
             clienteActualizar.levelPrice = levelPrice
             clienteActualizar.active = active
@@ -120,18 +117,17 @@ export default function FormularioEmpleado(){
                 twitter: '',
                 linkedin: '',
                 skype: '',
-                customerCode: '',
-                payIVA: '',
-                creditActive: '',
-                creditLimit: '',
+                codeCustomer: '',
+                payIVA: false,
+                creditLimit: 0,
                 levelPrice: '',
                 active: ''
             })
         }
     }, [clienteseleccionado])
 
-    const {name, lastname, identidad, gender, rtn, fec_nac, phone1, phone2, email, country, city,
-           location, website, facebook, twitter, linkedin, skype, customerCode, payIVA, creditActive,
+    let {name, lastname, identidad, gender, rtn, fec_nac, phone1, phone2, email, country, city,
+           location, website, facebook, twitter, linkedin, skype, codeCustomer, payIVA, 
            creditLimit,levelPrice, active} = cliente
 
     
@@ -142,27 +138,33 @@ export default function FormularioEmpleado(){
         })
     }
 
+    function changeBooleanPayIVA(payiva){
+        switch(payiva){
+            case "true": return true;
+            case "false": return false;
+            default: return false;
+        }
+    }
+
     const handleSubmit = e =>{
         e.preventDefault();
         //Validaciones
         if(name.trim()==='' || lastname.trim()==='' || identidad.trim()==='' || gender.trim()==='' || rtn.trim()===''||
            fec_nac.trim()==='' || phone1.trim()==='' || email.trim()==='' || country.trim()==='' || city.trim()==='' ||
-           location.trim()==='' || customerCode.trim()==='' || creditLimit.trim()==='' || levelPrice.trim()==='')
+           location.trim()==='' || codeCustomer.trim()==='' || levelPrice.trim()==='')
         {
             validarCliente();
             return;
         }
 
-        if(payIVA){
+        if(parseFloat(creditLimit) < 0){
             validarCliente();
             return;
         }
-        if(creditActive){
-            validarCliente();
-            return;
-        }
-        
-        console.log(active)
+
+        payIVA = changeBooleanPayIVA(payIVA)
+
+        console.log(active, payIVA)
 
         //Comprobamos si es agregar o editar
         if(clienteseleccionado === null){
@@ -200,9 +202,8 @@ export default function FormularioEmpleado(){
             twitter: '',
             linkedin: '',
             skype: '',
-            customerCode: '',
+            codeCustomer: '',
             payIVA: '',
-            creditActive: '',
             creditLimit: '',
             levelPrice: '',
             active: ''
@@ -474,28 +475,36 @@ export default function FormularioEmpleado(){
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
-                                                    name="codeEmployee"
-                                                    value={customerCode}
+                                                    name="codeCustomer"
+                                                    value={codeCustomer}
                                                     onChange={onChange}
                                                     placeholder="Código de Cliente"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="creditLimit">Límite de Credito</label>
                                                 <input 
-                                                    type="text" 
-                                                    className="form-control" 
-                                                    name="creditActive"
-                                                    value={creditActive}
-                                                    onChange={onChange}
-                                                    placeholder="Credito Activo"/>
-                                            </div>
-                                            <div className="form-group col-md-12">
-                                                <input 
-                                                    type="text" 
+                                                    type="number" 
                                                     className="form-control"
                                                     name="creditLimit"
                                                     value={creditLimit}
                                                     onChange={onChange} 
                                                     placeholder="Credito Limite"/>
+                                            </div>
+                                            <div className="form-group col-md-12">
+                                                <input 
+                                                    type="text" 
+                                                    className="form-control"
+                                                    name="levelPrice"
+                                                    value={levelPrice}
+                                                    onChange={onChange}
+                                                    placeholder="Nivel de precio"/>
+                                            </div>
+                                            <div className="form-group col-md-12">
+                                                <div className="switch switch-primary d-inline m-r-10">
+                                                    <input type="checkbox" id="switch-p-2" name="payIVA" value="true" onChange={onChange}/>
+                                                    <label htmlFor="switch-p-2" className="cr"></label>
+                                                </div>
+                                                <label htmlFor="">PayIVA</label>
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <div className="switch switch-primary d-inline m-r-10">
