@@ -151,7 +151,7 @@ export default function FormularioProveedor(){
     }, [proveedorseleccionado])
 
     let {name, lastname, identidad, gender, rtn, fec_nac, phone1, phone2, email, country, city,
-           location, website, facebook, twitter, linkedin, skype, codeSupplier,companyName,companyCity,
+           location, website, facebook, twitter, linkedin, skype, codeSupplier,companyName,
            companyLocation,companyPhone1,companyPhone2,companyRtn,companyWebsite,companyLogo,title,
            workPosition,active} = proveedor
 
