@@ -75,7 +75,7 @@ export default function Proveedores(){
                                 <div className="col-4 mb-2">
                                     <div className="text-right">
                                         <Link className="btn btn-sm btn-primary m-2" to='/admin/proveedores/nuevo'>
-                                            <span className="pcoded-micon"><i className="ti-user"></i></span>
+                                            <span className="pcoded-micon"><i className="ti-truck"></i></span>
                                             <span className="pcoded-mtext p-2">Agregar</span>
                                         </Link>
                                         <button className="btn btn-sm btn-primary m-2"
