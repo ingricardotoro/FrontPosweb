@@ -47,7 +47,7 @@ export default function FormularioProveedor(){
 
     useEffect(()=>{
         if(proveedorseleccionado !== null){
-            console.log('proveedor seleccionado ',proveedorseleccionado)
+            //console.log('proveedor seleccionado ',proveedorseleccionado)
             const proveedorActualizar = {
                 _id: proveedorseleccionado._id,
                 personid: '',
@@ -243,6 +243,7 @@ export default function FormularioProveedor(){
                                             <h4 className="card-title">Datos Personales</h4>
                                             <hr/>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="name">Nombre</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -253,6 +254,7 @@ export default function FormularioProveedor(){
                                                 
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="lastname">Apellido</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -263,6 +265,7 @@ export default function FormularioProveedor(){
                                                 />
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="identidad">No Identidad</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -272,15 +275,17 @@ export default function FormularioProveedor(){
                                                     placeholder="No. Identidad"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="email">Correo</label>
                                                 <input 
                                                     type="email" 
                                                     className="form-control" 
                                                     name="email"
                                                     value={email}
                                                     onChange={onChange}
-                                                    placeholder="Email"/>
+                                                    placeholder="Correo electronico"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="rtn">RTN</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
@@ -352,15 +357,17 @@ export default function FormularioProveedor(){
                                             <h4 className="card-title">Datos de Contacto</h4>
                                             <hr/>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="phone1">Telefono</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
                                                     name="phone1"
                                                     value={phone1}
                                                     onChange={onChange} 
-                                                    placeholder="Telefono"/>
+                                                    placeholder="Telefono fijo"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="phone2">Celular</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
@@ -370,24 +377,27 @@ export default function FormularioProveedor(){
                                                     placeholder="Celular"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="companyPhone1">Telefono de empresa</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
                                                     name="companyPhone1"
                                                     value={companyPhone1}
                                                     onChange={onChange}
-                                                    placeholder="Telefono empresa"/>
+                                                    placeholder="Telefono fijo de la empresa"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="companyPhone2">Celular de Empresa</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
                                                     name="companyPhone2"
                                                     value={companyPhone2}
                                                     onChange={onChange}
-                                                    placeholder="Telefono empresa"/>
+                                                    placeholder="Telefono celular de la empresa"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="country">País</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
@@ -397,15 +407,17 @@ export default function FormularioProveedor(){
                                                     placeholder="País"/>             
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="location">Residencia</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
                                                     name="location"
                                                     value={location}
                                                     onChange={onChange}
-                                                    placeholder="Calle, Colonia"/>             
+                                                    placeholder="Residencia, Colonia"/>             
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="city">Ciudad</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -517,6 +529,7 @@ export default function FormularioProveedor(){
                                             <h4 className="card-title">Datos de Proveedor</h4>
                                             <hr/>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="codeSupplier">Código de Proveedor</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -526,15 +539,17 @@ export default function FormularioProveedor(){
                                                     placeholder="Código de Proveedor"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="companyName">Nombre de Empresa</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
                                                     name="companyName"
                                                     value={companyName}
                                                     onChange={onChange}
-                                                    placeholder="Nombre de Empresa"/>
+                                                    placeholder="Nombre de la empresa"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="companyRtn">RTN Empresa</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
@@ -544,15 +559,17 @@ export default function FormularioProveedor(){
                                                     placeholder="RTN de la empresa"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="companyLocation">Ubicacion de Empresa</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
                                                     name="companyLocation"
                                                     value={companyLocation}
                                                     onChange={onChange}
-                                                    placeholder="Ubicacion de Empresa"/>
+                                                    placeholder="Ubicacion de la empresa"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="title">Título</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -562,6 +579,7 @@ export default function FormularioProveedor(){
                                                     placeholder="Grado academico de Proveedor"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="workPosition">Cargo</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"

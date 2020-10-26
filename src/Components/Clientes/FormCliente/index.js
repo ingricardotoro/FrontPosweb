@@ -230,6 +230,7 @@ export default function FormularioCliente(){
                                             <h4 className="card-title">Datos Personales</h4>
                                             <hr/>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="name">Nombre</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -240,6 +241,7 @@ export default function FormularioCliente(){
                                                 
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="lastname">Apellido</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -250,6 +252,7 @@ export default function FormularioCliente(){
                                                 />
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="identidad">No Identidad</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -259,15 +262,17 @@ export default function FormularioCliente(){
                                                     placeholder="No. Identidad"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="email">Correo</label>
                                                 <input 
                                                     type="email" 
                                                     className="form-control" 
                                                     name="email"
                                                     value={email}
                                                     onChange={onChange}
-                                                    placeholder="Email"/>
+                                                    placeholder="Correo electronico"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="rtn">RTN</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
@@ -339,24 +344,27 @@ export default function FormularioCliente(){
                                             <h4 className="card-title">Datos de Contacto</h4>
                                             <hr/>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="phone1">Telefono</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
                                                     name="phone1"
                                                     value={phone1}
                                                     onChange={onChange} 
-                                                    placeholder="Telefono"/>
+                                                    placeholder="Telefono fijo"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="phone2">Celular</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
                                                     name="phone2"
                                                     value={phone2}
                                                     onChange={onChange}
-                                                    placeholder="Celular"/>
+                                                    placeholder="Telefono Celular"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="country">País</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
@@ -366,15 +374,17 @@ export default function FormularioCliente(){
                                                     placeholder="País"/>             
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="location">Residencia</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
                                                     name="location"
                                                     value={location}
                                                     onChange={onChange}
-                                                    placeholder="Calle, Colonia"/>             
+                                                    placeholder="Residencia, Colonia"/>             
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="city">Ciudad</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -472,6 +482,7 @@ export default function FormularioCliente(){
                                             <h4 className="card-title">Datos de Cliente</h4>
                                             <hr/>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="codeCustomer">Código Cliente</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -491,6 +502,7 @@ export default function FormularioCliente(){
                                                     placeholder="Credito Limite"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="levelPrice">Nivel de Precio</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -504,7 +516,7 @@ export default function FormularioCliente(){
                                                     <input type="checkbox" id="switch-p-2" name="payIVA" value="true" onChange={onChange}/>
                                                     <label htmlFor="switch-p-2" className="cr"></label>
                                                 </div>
-                                                <label htmlFor="">PayIVA</label>
+                                                <label htmlFor="">Paga IVA</label>
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <div className="switch switch-primary d-inline m-r-10">

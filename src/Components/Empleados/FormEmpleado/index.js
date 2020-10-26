@@ -221,6 +221,7 @@ export default function FormularioEmpleado(){
                                             <h4 className="card-title">Datos Personales</h4>
                                             <hr/>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="name">Nombre</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -231,6 +232,7 @@ export default function FormularioEmpleado(){
                                                 
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="lastname">Apellido</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -241,6 +243,7 @@ export default function FormularioEmpleado(){
                                                 />
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="identidad">No Identidad</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -250,15 +253,17 @@ export default function FormularioEmpleado(){
                                                     placeholder="No. Identidad"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="email">Correo</label>
                                                 <input 
                                                     type="email" 
                                                     className="form-control" 
                                                     name="email"
                                                     value={email}
                                                     onChange={onChange}
-                                                    placeholder="Email"/>
+                                                    placeholder="Correo"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="rtn">RTN</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
@@ -330,6 +335,7 @@ export default function FormularioEmpleado(){
                                             <h4 className="card-title">Datos de Contacto</h4>
                                             <hr/>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="phone1">Telefono</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -339,6 +345,7 @@ export default function FormularioEmpleado(){
                                                     placeholder="Telefono"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="phone2">Celular</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
@@ -348,6 +355,7 @@ export default function FormularioEmpleado(){
                                                     placeholder="Celular"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="country">País</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
@@ -357,15 +365,17 @@ export default function FormularioEmpleado(){
                                                     placeholder="País"/>             
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="location">Residencia</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
                                                     name="location"
                                                     value={location}
                                                     onChange={onChange}
-                                                    placeholder="Calle, Colonia"/>             
+                                                    placeholder="Residencia, Colonia"/>             
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="city">Ciudad</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -463,6 +473,7 @@ export default function FormularioEmpleado(){
                                             <h4 className="card-title">Datos de Empleado</h4>
                                             <hr/>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="codeEmployee">Código de Empleado</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
@@ -472,6 +483,7 @@ export default function FormularioEmpleado(){
                                                     placeholder="Código de Empleado"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="workPosition">Cargo</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control" 
@@ -481,6 +493,7 @@ export default function FormularioEmpleado(){
                                                     placeholder="Cargo, Posición de trabajo"/>
                                             </div>
                                             <div className="form-group col-md-12">
+                                                <label htmlFor="workLocation">Direccion</label>
                                                 <input 
                                                     type="text" 
                                                     className="form-control"
