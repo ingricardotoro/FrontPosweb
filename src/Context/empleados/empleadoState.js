@@ -46,11 +46,11 @@ const EmpleadoState = props => {
         //console.log(empleado)
         try {
             const response = await Axios.post('employees', empleado);
-            //console.log('guardando empleado ',response);
+            console.log('guardando empleado ',response);
             
             dispatch({
                 type: AGREGAR_EMPLEADO,
-                payload: response.data.employees
+                payload: empleado
             })
         } catch (error) {
             console.log(error);

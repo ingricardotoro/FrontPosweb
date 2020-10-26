@@ -2,13 +2,13 @@ import React, {useState, useContext, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import empleadoContext from '../../../Context/empleados/empleadoContext';
-import AlertaContext from '../../../Context/alertas/alertaContext';
+//import AlertaContext from '../../../Context/alertas/alertaContext';
 
 export default function FormularioEmpleado(){
     const history = useHistory()
 
-    const alertaContext = useContext(AlertaContext);
-    const {alerta, mostrarAlerta} = alertaContext;
+    //const alertaContext = useContext(AlertaContext);
+    //const {alerta, mostrarAlerta} = alertaContext;
 
     const [empleado, setEmpleado] = useState({
         personid: -1,
@@ -149,19 +149,29 @@ export default function FormularioEmpleado(){
 
         //Comprobamos si es agregar o editar
         if(empleadoseleccionado === null){
-            console.log('empleado form ',empleado);
+            //console.log('empleado form ',empleado);
             agregarEmpleado(empleado);
             //Redirigimos a la tabla de ver empleados
             history.push('/admin/empleados');
             
         }else{
             actualizarEmpleado(empleado);
-            if(editado){
+            /*if(editado){
                 mostrarAlerta('Actualizado exitosamente!','alert-success');
-            }
+            }*/
             history.push('/admin/empleados');
             
         }
+        /*
+        {alerta ? 
+            (
+                <div className={`alert ${alerta.tipoAlerta}`}>
+                    {alerta.msg ? 'Credenciales incorrectas': null}
+                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                </div>
+            ): null}*/
 
         //Reiniciamos el formulario
         setEmpleado({
@@ -199,6 +209,7 @@ export default function FormularioEmpleado(){
                         <h4 className="card-title">{empleadoseleccionado ? 'Editar Empleado': 'Agregar Empleado'}</h4>
                         <hr/>
                         <div className="errores">
+                        
                         {errorempleado ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
                         </div>
                         
