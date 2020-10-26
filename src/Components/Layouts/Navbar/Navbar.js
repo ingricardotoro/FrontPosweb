@@ -9,7 +9,7 @@ import AuthContext from '../../../Context/autenticacion/authContext';
 export default function Navbar(){
     
     const authContext = useContext(AuthContext);
-    const {autenticado, usuario} = authContext;
+    const {autenticado, usuarioAuth} = authContext;
 
     return (
         <header className="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
@@ -36,7 +36,7 @@ export default function Navbar(){
                                     (
                                         <>
                                         <img src={userImg} alt="user-default" className="rounded-circle"/>
-                                        <span>{usuario.username}</span>
+                                        <span>{usuarioAuth.username}</span>
                                         <Link to="#!" className="dud-logout" title="Logout"><i className="ti-lock"></i></Link>
                                         </>
                                     )

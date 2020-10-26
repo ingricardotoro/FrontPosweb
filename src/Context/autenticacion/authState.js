@@ -10,7 +10,7 @@ const AuthState = props =>{
     const initialState = {
         token: localStorage.getItem('token'),
         autenticado: null,
-        usuario: null,
+        usuarioAuth: null,
         mensaje: null,
         cargando: true
     }
@@ -20,15 +20,30 @@ const AuthState = props =>{
     const iniciarSesion = async data =>{
         try {
             const response = await Axios.post('auth/login', data);
-            console.log('iniciar sesion ', response);
+            console.log(response);
 
-            dispatch({
-                type: LOGIN_EXITOSO,
-                payload: response.data
-            });
+            if(response.status===400){
+                alert(response.errors)
+                const alerta = {
+                    msg: response.data.errors.password.msg,
+                    tipoAlerta: 'alert-danger alert-dismissible fade show'
+                }
+                
+                dispatch({
+                    type: LOGIN_ERROR,
+                    payload: alerta
+                })
+            }
+
+            if(response.data.userDB){
+                dispatch({
+                    type: LOGIN_EXITOSO,
+                    payload: response.data
+                });
+            }
 
         } catch (error) {
-            console.error(error);
+            console.error('error login ',error);
 
             const alerta = {
                 msg: error,
@@ -48,13 +63,16 @@ const AuthState = props =>{
         })
     }
 
+
+
     return(
         <AuthContext.Provider
             value={{
                 token: state.token,
                 autenticado: state.autenticado,
-                usuario: state.usuario,
+                usuarioAuth: state.usuarioAuth,
                 cargando: state.cargando,
+                mensaje: state.mensaje,
                 iniciarSesion,
                 cerrarSesion
             }}

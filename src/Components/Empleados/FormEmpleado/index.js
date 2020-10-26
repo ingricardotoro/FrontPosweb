@@ -2,13 +2,13 @@ import React, {useState, useContext, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import empleadoContext from '../../../Context/empleados/empleadoContext';
-//import AlertaContext from '../../../Context/alertas/alertaContext';
+import AlertaContext from '../../../Context/alertas/alertaContext';
 
 export default function FormularioEmpleado(){
     const history = useHistory()
 
-    //const alertaContext = useContext(AlertaContext);
-    //const {alerta, mostrarAlerta} = alertaContext;
+    const alertaContext = useContext(AlertaContext);
+    const {alerta, mostrarAlerta} = alertaContext;
 
     const [empleado, setEmpleado] = useState({
         personid: -1,
@@ -36,7 +36,7 @@ export default function FormularioEmpleado(){
     })
 
     const EmpleadoContext = useContext(empleadoContext);
-    const {empleadoseleccionado, errorempleado, agregarEmpleado, actualizarEmpleado, validarEmpleado} = EmpleadoContext;
+    const {editado, empleadoseleccionado, errorempleado, agregarEmpleado, actualizarEmpleado, validarEmpleado} = EmpleadoContext;
 
     useEffect(()=>{
         if(empleadoseleccionado !== null){
@@ -145,10 +145,6 @@ export default function FormularioEmpleado(){
             return;
         }
 
-        if(errorempleado){
-
-        }
-        
         console.log(active)
 
         //Comprobamos si es agregar o editar
@@ -156,15 +152,15 @@ export default function FormularioEmpleado(){
             console.log('empleado form ',empleado);
             agregarEmpleado(empleado);
             //Redirigimos a la tabla de ver empleados
-            /*setTimeout(()=>{
-                mostrarAlerta('Empleado agrega exitosamente!', 'alert-info alert-dismissible fade show');
-                
-            },3000)*/
             history.push('/admin/empleados');
             
         }else{
             actualizarEmpleado(empleado);
+            if(editado){
+                mostrarAlerta('Actualizado exitosamente!','alert-success');
+            }
             history.push('/admin/empleados');
+            
         }
 
         //Reiniciamos el formulario
@@ -203,7 +199,7 @@ export default function FormularioEmpleado(){
                         <h4 className="card-title">{empleadoseleccionado ? 'Editar Empleado': 'Agregar Empleado'}</h4>
                         <hr/>
                         <div className="errores">
-                            {errorempleado ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
+                        {errorempleado ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
                         </div>
                         
                         <form onSubmit={handleSubmit}>

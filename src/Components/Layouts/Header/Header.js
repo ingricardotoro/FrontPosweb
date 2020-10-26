@@ -8,7 +8,7 @@ import AuthContext from '../../../Context/autenticacion/authContext';
 
 export default function Header(){
     const authContext = useContext(AuthContext);
-    const {autenticado, usuario} = authContext;
+    const {autenticado, usuarioAuth} = authContext;
 
     return (
         <>
@@ -24,8 +24,8 @@ export default function Header(){
                                 <div className="main-menu-header">
                                     <img src={userImg} alt="User default" className="img-radius"/>
                                     <div className="user-details">
-                            <span className="mb-0 font-weight-bold">{usuario.username}</span>
-                            <div id="more-details"><small>{usuario.role}</small></div>
+                            <span className="mb-0 font-weight-bold">{usuarioAuth.username}</span>
+                            <div id="more-details"><small>{usuarioAuth.role}</small></div>
                                     </div>
                                 </div>
                                 </>

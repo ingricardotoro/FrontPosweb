@@ -8,18 +8,26 @@ import logo from './logo.png'
 
 export default function Login(props){
 
-    console.log('props en login ',props)
+    //console.log('props en login ',props)
     const history = useHistory()
 
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
 
     const authContext = useContext(AuthContext);
-    const {mensaje, autenticado, iniciarSesion} = authContext;
+    const {usuarioAuth, mensaje, autenticado, iniciarSesion} = authContext;
+
 
     useEffect(()=>{
-        if(autenticado){ history.push('/admin/inicio'); } 
-        if(mensaje){ mostrarAlerta(mensaje.msg, mensaje.tipoAlerta); } 
+        if(autenticado){
+            history.push('admin/inicio')
+        } 
+        
+        /*if(mensaje){ 
+            mostrarAlerta(mensaje, mensaje.tipoAlerta); 
+            break;
+        }*/
+
     },[mensaje, autenticado, history, mostrarAlerta])
 
     const [usuario, setUsuario] = useState({
@@ -38,7 +46,7 @@ export default function Login(props){
     
     const handleSubmit = (e)=>{
         e.preventDefault();
-        console.log(username, password);
+        //console.log(username, password);
 
         //Validaciones
         if(username.trim()==='' || password.trim()===''){
@@ -46,6 +54,10 @@ export default function Login(props){
         }
         
         iniciarSesion({username, password});
+
+        if(usuarioAuth){
+            alert(usuarioAuth)
+        }
     }
 
     return (
@@ -56,7 +68,7 @@ export default function Login(props){
                 {alerta ?
                     (
                     <div className={`alert ${alerta.tipoAlerta}`}>
-                        {alerta.msg}
+                        {alerta.msg ? 'Credenciales incorrectas': null}
                         <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">X</span>
                         </button>

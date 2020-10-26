@@ -3,11 +3,15 @@ import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import empleadoContext from '../../Context/empleados/empleadoContext';
+import alertaContext from '../../Context/alertas/alertaContext';
 
 export default function Empleados(){
 
     const EmpleadoContext = useContext(empleadoContext);
-    const { empleados, obtenerEmpleados, guardarEmpleadoActual, eliminarEmpleado } = EmpleadoContext;
+    const {eliminado, empleados, obtenerEmpleados, guardarEmpleadoActual, eliminarEmpleado } = EmpleadoContext;
+
+    const AlertaContext = useContext(alertaContext);
+    const {alerta, mostrarAlerta} = AlertaContext;
 
     const [termino, setTermino] = useState();
 
@@ -23,9 +27,12 @@ export default function Empleados(){
     }
 
     const onClickEliminar = empleado => {
-        alert('vamos a eliminar ayudaaaaaaaaaa!')
+        alert(`${eliminado} vamos a eliminar!`)
         eliminarEmpleado(empleado);
-        obtenerEmpleados()
+        if(eliminado){
+            mostrarAlerta('Empleado eliminado exitosamente!', 'alert-success')
+        }
+        obtenerEmpleados();
     }
 
     /*
@@ -43,19 +50,32 @@ export default function Empleados(){
                 <div className="col-12">
                     <div className="card">
                         <div className="card-body">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <div className="input-group-text"><i className="ti-search"></i></div>
+                            {alerta ?
+                            (
+                                <div className={`alert ${alerta.tipoAlerta}`}>
+                                    {alerta.msg}
+                                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">X</span>
+                                    </button>
                                 </div>
-                                <input 
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Buscar empleado..."
-                                    name="termino"
-                                    value={termino}
-                                    onChange={e=> setTermino(e.target.value)}
-                                />
-                            </div>
+                            )
+                            : 
+                            (    <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text"><i className="ti-search"></i></div>
+                                    </div>
+                                    <input 
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Buscar empleado..."
+                                        name="termino"
+                                        value={termino}
+                                        onChange={e=> setTermino(e.target.value)}
+                                    />
+                                </div>
+                            )
+                            }
+
                         </div>
                     </div>
                 </div>

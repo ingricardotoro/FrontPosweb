@@ -31,7 +31,6 @@ export default function FormularioProveedor(){
         skype: '',
         codeSupplier:'',
         companyName:'',
-        companyCity:'',
         companyLocation:'',
         companyPhone1:'',
         companyPhone2:'',
@@ -71,7 +70,6 @@ export default function FormularioProveedor(){
                 skype: '',
                 codeSupplier:'',
                 companyName:'',
-                companyCity:'',
                 companyLocation:'',
                 companyPhone1:'',
                 companyPhone2:'',
@@ -84,7 +82,7 @@ export default function FormularioProveedor(){
             };
             const {_id, name, lastname, identidad, gender, rtn, fec_nac, phone1, phone2, email, country, city, location, 
                     website, facebook, twitter, linkedin,skype} = proveedorseleccionado.personid;
-            const {codeSupplier,companyName,companyCity,companyLocation,companyPhone1,companyPhone2,companyRtn,companyWebsite,
+            const {codeSupplier,companyName,companyLocation,companyPhone1,companyPhone2,companyRtn,companyWebsite,
                    companyLogo,title,workPosition,active} = proveedorseleccionado;
             
             proveedorActualizar.personid = _id
@@ -107,7 +105,6 @@ export default function FormularioProveedor(){
             proveedorActualizar.skype = skype
             proveedorActualizar.codeSupplier = codeSupplier
             proveedorActualizar.companyName = companyName
-            proveedorActualizar.companyCity = companyCity
             proveedorActualizar.companyLocation = companyLocation
             proveedorActualizar.companyPhone1 = companyPhone1
             proveedorActualizar.companyPhone2 = companyPhone2
@@ -140,7 +137,6 @@ export default function FormularioProveedor(){
                 skype: '',
                 codeSupplier:'',
                 companyName:'',
-                companyCity:'',
                 companyLocation:'',
                 companyPhone1:'',
                 companyPhone2:'',
@@ -171,27 +167,21 @@ export default function FormularioProveedor(){
     const handleSubmit = e =>{
         e.preventDefault();
         //Validaciones
-        if(name.trim()==='' || lastname.trim()==='' || identidad.trim()==='' || gender.trim()==='' || rtn.trim()===''||
-           fec_nac.trim()==='' || phone1.trim()==='' || email.trim()==='' || country.trim()==='' || city.trim()==='' ||
-           location.trim()==='' || codeSupplier.trim()==='' || companyName.trim()==='' || companyCity.trim()==='' ||
-           companyLocation.trim()==='' || companyPhone1.trim()==='' || companyPhone2.trim()==='' || companyRtn.trim()==='' ||
-           companyWebsite.trim()==='' || title.trim()==='' || workPosition.trim()==='' )
+        if(name.trim()==='' || lastname.trim()==='' || identidad.trim()==='' || gender.trim()==='' ||
+           rtn.trim()===''|| fec_nac.trim()==='' || phone1.trim()==='' || email.trim()==='' || 
+           country.trim()==='' || city.trim()==='' || location.trim()==='' || codeSupplier.trim()==='' ||
+           companyName.trim()==='' || companyLocation.trim()==='' || 
+           companyPhone1.trim()==='' || title.trim()==='' || workPosition.trim()==='')
         {
             validarProveedor();
             return;
         }
 
-        console.log(active, companyLogo.trim()==='')
-        
         //Comprobamos si es agregar o editar
         if(proveedorseleccionado === null){
             console.log('proveedor form ',proveedor);
             agregarProveedor(proveedor);
             //Redirigimos a la tabla de ver proveedores
-            /*setTimeout(()=>{
-                mostrarAlerta('Empleado agrega exitosamente!', 'alert-info alert-dismissible fade show');
-                
-            },3000)*/
             history.push('/admin/proveedores');
             
         }else{
@@ -221,7 +211,6 @@ export default function FormularioProveedor(){
             skype: '',
             codeSupplier:'',
             companyName:'',
-            companyCity:'',
             companyLocation:'',
             companyPhone1:'',
             companyPhone2:'',
@@ -299,15 +288,6 @@ export default function FormularioProveedor(){
                                                     value={rtn}
                                                     onChange={onChange}
                                                     placeholder="RTN"/>
-                                            </div>
-                                            <div className="form-group col-md-12">
-                                                <input 
-                                                    type="text" 
-                                                    className="form-control" 
-                                                    name="companyRtn"
-                                                    value={companyRtn}
-                                                    onChange={onChange}
-                                                    placeholder="RTN de la empresa"/>
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <div className="row">
@@ -557,11 +537,11 @@ export default function FormularioProveedor(){
                                             <div className="form-group col-md-12">
                                                 <input 
                                                     type="text" 
-                                                    className="form-control"
-                                                    name="companyCity"
-                                                    value={companyCity}
+                                                    className="form-control" 
+                                                    name="companyRtn"
+                                                    value={companyRtn}
                                                     onChange={onChange}
-                                                    placeholder="Ciudad de ubicacion de Empresa"/>
+                                                    placeholder="RTN de la empresa"/>
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <input 
@@ -581,11 +561,9 @@ export default function FormularioProveedor(){
                                                     onChange={onChange}
                                                     placeholder="Grado academico de Proveedor"/>
                                             </div>
-                                            
                                             <div className="form-group col-md-12">
-                                                <label htmlFor="creditLimit">Cargo</label>
                                                 <input 
-                                                    type="number" 
+                                                    type="text" 
                                                     className="form-control"
                                                     name="workPosition"
                                                     value={workPosition}
@@ -594,8 +572,8 @@ export default function FormularioProveedor(){
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <div className="switch switch-primary d-inline m-r-10">
-                                                    <input type="checkbox" id="switch-p-1" name="active" value="true" onChange={onChange}/>
-                                                    <label htmlFor="switch-p-1" className="cr"></label>
+                                                    <input type="checkbox" id="switch-p-2" name="active" value="true" onChange={onChange}/>
+                                                    <label htmlFor="switch-p-2" className="cr"></label>
                                                 </div>
                                                 <label htmlFor="">Activo</label>
                                             </div>

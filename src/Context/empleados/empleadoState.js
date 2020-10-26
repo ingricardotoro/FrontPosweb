@@ -20,7 +20,10 @@ const EmpleadoState = props => {
     const initalState = {
         empleados: [],
         errorempleado: false,
-        empleadoseleccionado: null
+        empleadoseleccionado: null,
+        agregado: false,
+        editado: false,
+        eliminado: false
     }
 
     const [state, dispatch] = useReducer(empleadoReducer, initalState);
@@ -35,6 +38,7 @@ const EmpleadoState = props => {
             })
         } catch (error) {
             console.log(error);
+            
         }
     }
     
@@ -50,6 +54,9 @@ const EmpleadoState = props => {
             })
         } catch (error) {
             console.log(error);
+            dispatch({
+                type: VALIDAR_EMPLEADO
+            })
         }
     }
 
@@ -118,6 +125,9 @@ const EmpleadoState = props => {
                 empleados: state.empleados,
                 errorempleado: state.errorempleado,
                 empleadoseleccionado: state.empleadoseleccionado,
+                agregado: state.agregado,
+                eliminado: state.eliminado,
+                editado: state.editado,
                 obtenerEmpleados,
                 agregarEmpleado,
                 actualizarEmpleado,
