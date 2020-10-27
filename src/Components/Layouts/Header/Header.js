@@ -44,7 +44,13 @@ export default function Header(){
                                 </Link>
                             </li>
                             <li className="nav-item pcoded-menu-caption"><label htmlFor="">Usuarios</label></li>
-                            
+                            <li className="nav-item">
+                                <Link className="nav-link pcoded-hasmenu" to={'/admin/usuarios'}>
+                                    <span className="pcoded-micon"><i className="ti-user"></i></span>
+                                    <span className="pcoded-mtext">Usuarios</span>
+                                </Link>
+                            </li>
+                            <li className="nav-item pcoded-menu-caption"><label htmlFor="">Gestion</label></li>
                             <li className="nav-item">
                                 <Link className="nav-link pcoded-hasmenu" to={'/admin/empleados'}>
                                     <span className="pcoded-micon"><i className="ti-user"></i></span>

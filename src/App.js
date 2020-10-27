@@ -7,6 +7,7 @@ import AuthState from './Context/autenticacion/authState';
 import EmpleadoState from './Context/empleados/empleadoState';
 import ClienteState from './Context/clientes/clienteState';
 import ProveedorState from './Context/proveedores/proveedorState';
+import UsuarioState from './Context/usuarios/usuarioState';
 
 //Pages 
 import Home from 'Pages/Home';
@@ -15,6 +16,7 @@ import PanelAdmin from 'Pages/PanelAdmin';
 function App() {
   return (
     <>
+    <UsuarioState>
     <EmpleadoState>
     <ClienteState>
     <ProveedorState> 
@@ -31,6 +33,7 @@ function App() {
     </ProveedorState>
     </ClienteState>
     </EmpleadoState>
+    </UsuarioState>
     </>
   );
 }
