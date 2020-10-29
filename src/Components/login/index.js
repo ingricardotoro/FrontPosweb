@@ -1,12 +1,15 @@
 import React, {useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import Spinner from '../Spinner';
+
 import AuthContext from '../../Context/autenticacion/authContext';
 import AlertaContext from '../../Context/alertas/alertaContext';
 
 import logo from './logo.png'
 
 export default function Login(props){
+
 
     //console.log('props en login ',props)
     const history = useHistory()
@@ -35,6 +38,8 @@ export default function Login(props){
         password: ''
     });
 
+    const [loading, setLoading] = useState(false);
+
     const {username, password} = usuario;
 
     const onChange = e =>{
@@ -44,26 +49,29 @@ export default function Login(props){
         })
     }
     
-    const handleSubmit = (e)=>{
+    const handleSubmit = e =>{
         e.preventDefault();
         //console.log(username, password);
-
+        setLoading(true)
         //Validaciones
         if(username.trim()==='' || password.trim()===''){
-            mostrarAlerta('El nombre de usuario y la contraseña son obligatorios', 'alert-danger alert-dismissible fade show')
+            mostrarAlerta('El nombre de usuario y la contraseña son obligatorios', 'alert-danger alert-dismissible fade show');
         }
         
         iniciarSesion({username, password});
 
-        if(usuarioAuth){
-            alert(usuarioAuth)
-        }
+        setLoading(false);
     }
 
     return (
         <>
         <div className="auth-wrapper">
             <div className="auth-content text-center">
+                {loading ?
+                    <Spinner/>
+                : null
+                }
+                
                 <img src={logo} alt="LOGO" className="img-fluid mb-4"/>
                 {alerta ?
                     (

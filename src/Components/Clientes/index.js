@@ -95,7 +95,6 @@ export default function Empleados(){
                                             <th>COD. Cliente</th>
                                             <th>Nombre</th>
                                             <th>No.Identidad</th>
-                                            <th>Credito Activo</th>
                                             <th>Limite de Credito</th>
                                             <th>Nivel de precio</th>
                                             <th className="w100 text-nowrap">Acciones</th>
@@ -114,8 +113,7 @@ export default function Empleados(){
                                                         <td>{cliente.codeCustomer}</td>
                                                         <td>{cliente.personid.name} {cliente.personid.lastname}</td>
                                                         <td>{cliente.personid.identidad}</td>
-                                                        <td>{cliente.creditActive ? "Si": "No"}</td>
-                                                        <td>{cliente.creditLimit}</td>
+                                                        <td>{cliente.creditLimit} LPS.</td>
                                                         <td>{cliente.levelPrice}</td>
                                                         <td className="text-nowrap text-center">
                                                             <button

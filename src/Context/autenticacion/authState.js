@@ -63,8 +63,6 @@ const AuthState = props =>{
         })
     }
 
-
-
     return(
         <AuthContext.Provider
             value={{

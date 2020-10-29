@@ -35,15 +35,6 @@ export default function Empleados(){
         obtenerEmpleados();
     }
 
-    /*
-    if(termino!==undefined && termino.length > 0){
-        empleados = empleados.filter(empleado=>
-            //console.log(empleado)
-            empleado.name.toLowerCase().indexOf(termino.toLowerCase()) > -1
-        )
-    }
-    */
-
     return(
         <>
             <div className="row">

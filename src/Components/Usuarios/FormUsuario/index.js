@@ -2,28 +2,29 @@ import React, {useState, useContext, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import usuarioContext from '../../../Context/usuarios/usuarioContext';
-//import AlertaContext from '../../../Context/alertas/alertaContext';
+import AlertaContext from '../../../Context/alertas/alertaContext';
 
 export default function FormularioUsuario(){
     const history = useHistory()
 
-    //const alertaContext = useContext(AlertaContext);
-    //const {alerta, mostrarAlerta} = alertaContext;
+    const alertaContext = useContext(AlertaContext);
+    const {alerta, mostrarAlerta} = alertaContext;
 
     const [usuario, setUsuario] = useState({
         employeeid: '',
         username: '',
         password: '',
+        passwordRepeat: '',
         role: ''
     })
 
     const UsuarioContext = useContext(usuarioContext);
     const { errorusuario, empleados, obtenerEmpleados,  agregarUsuario, validarUsuario } = UsuarioContext;
 
-    const {employeeid, username, password, role } = usuario
+    const { employeeid, username, password, passwordRepeat, role } = usuario
 
     useEffect(()=>{
-        obtenerEmpleados()
+        obtenerEmpleados();
     },[obtenerEmpleados])
     
     const onChange = e =>{
@@ -42,28 +43,22 @@ export default function FormularioUsuario(){
             return;
         }
 
+        if(password.trim() !== passwordRepeat.trim()){
+            mostrarAlerta('Contraseñas no coinciden', 'alert-danger alert-dismissible fade show');
+            return;
+        }
+
         //console.log('usuario form ',usuario);
-        agregarUsuario(usuario);
+        agregarUsuario({username, password, role, employeeid});
         //Redirigimos a la tabla de ver empleados
         history.push('/admin/usuarios');
-            
         
-        /*
-        {alerta ? 
-            (
-                <div className={`alert ${alerta.tipoAlerta}`}>
-                    {alerta.msg ? 'Credenciales incorrectas': null}
-                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">X</span>
-                    </button>
-                </div>
-            ): null}*/
-
         //Reiniciamos el formulario
         setUsuario({
             employeeid: '',
             username: '',
             password: '',
+            passwordRepeat,
             role: ''
         })
     }
@@ -77,7 +72,6 @@ export default function FormularioUsuario(){
                         <h4 className="card-title">Agregar Usuario</h4>
                         <hr/>
                         <div className="errores">
-                        
                         {errorusuario ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
                         </div>
                         
@@ -88,12 +82,21 @@ export default function FormularioUsuario(){
                                         <div className="card-body">
                                             <h4 className="card-title">Datos Usuario</h4>
                                             <hr/>
-                                            <div className="form-group col-md-6">
-                                                <select name="empleados" className="form-control">
+                                            <div className="form-group col-md-8">
+                                                <label htmlFor="empleado">Empleado</label>
+                                                <select name="employeeid" onChange={onChange} className="form-control">
                                                     <option value="">Seleccione el empleado</option>
+                                                    {empleados.map(empleado=>(
+                                                        <option
+                                                            key={empleado._id}
+                                                            value={empleado._id}
+                                                        >
+                                                            {` ${empleado.personid.name} ${empleado.personid.lastname}`} 
+                                                        </option>
+                                                    ))}
                                                 </select>
                                             </div>
-                                            <div className="form-group col-md-6">
+                                            <div className="form-group col-md-8">
                                                 <label htmlFor="username">Nombre de Usuario</label>
                                                 <input 
                                                     type="text" 
@@ -104,7 +107,7 @@ export default function FormularioUsuario(){
                                                     placeholder="Nombre de Usuario"
                                                 />
                                             </div>
-                                            <div className="form-group col-md-6">
+                                            <div className="form-group col-md-8">
                                                 <label htmlFor="password">Contraseña</label>
                                                 <input 
                                                     type="text" 
@@ -112,9 +115,20 @@ export default function FormularioUsuario(){
                                                     name="password"
                                                     value={password}
                                                     onChange={onChange} 
-                                                    placeholder="No. Identidad"/>
+                                                    placeholder="Contraseña"/>
+                                                {alerta ? (<small className={`alerta ${alerta.tipoAlerta}`}> {alerta.msg} </small>): null}
                                             </div>
-                                            <div className="form-group col-md-6">
+                                            <div className="form-group col-md-8">
+                                                <label htmlFor="passwordRepeat">Repita su Contraseña</label>
+                                                <input 
+                                                    type="password" 
+                                                    className="form-control"
+                                                    name="passwordRepeat"
+                                                    value={passwordRepeat}
+                                                    onChange={onChange} 
+                                                    placeholder="Repita la Contraseña"/>
+                                            </div>
+                                            <div className="form-group col-md-8">
                                                 <label htmlFor="role">Rol de Usuario</label>
                                                 <input 
                                                     type="text" 
@@ -122,7 +136,8 @@ export default function FormularioUsuario(){
                                                     name="role"
                                                     value={role}
                                                     onChange={onChange}
-                                                    placeholder="Rol de Usuario"/>
+                                                    placeholder="Rol de Usuario"
+                                                />
                                             </div>
                                         </div>
                                     </div>

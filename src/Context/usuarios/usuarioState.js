@@ -20,7 +20,8 @@ const UsuarioState = props => {
     const initalState = {
         usuarios: [],
         errorusuario: false,
-        usuarioseleccionado: null
+        usuarioseleccionado: null,
+        empleados: []
     }
 
     const [state, dispatch] = useReducer(usuarioReducer, initalState);
@@ -34,7 +35,7 @@ const UsuarioState = props => {
                 payload: response.data.employees
             })
         } catch (error) {
-            
+            console.log(error);
         }
     }
 
@@ -60,13 +61,14 @@ const UsuarioState = props => {
         console.log('usuario form ', usuario)
         try {
             const response = await Axios.post('users', usuario);
-           console.log('guardando usuario ',response);
+            console.log('guardando usuario ',response);
             
             dispatch({
                 type: AGREGAR_USUARIO,
                 payload: usuario
             })
         } catch (error) {
+            
             console.log(error);
         }
     }
@@ -111,6 +113,7 @@ const UsuarioState = props => {
                 empleados: state.empleados,
                 errorusuario: state.errorusuario,
                 usuarioseleccionado: state.usuarioseleccionado,
+                mensaje: state.mensaje,
                 obtenerUsuarios,
                 obtenerEmpleados,
                 agregarUsuario,
