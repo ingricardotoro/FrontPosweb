@@ -2,13 +2,13 @@ import React, {useState, useContext, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import proveedorContext from '../../../Context/proveedores/proveedorContext';
-//import AlertaContext from '../../../Context/alertas/alertaContext';
+import AlertaContext from '../../../Context/alertas/alertaContext';
 
 export default function FormularioProveedor(){
     const history = useHistory()
 
-    //const alertaContext = useContext(AlertaContext);
-    //const {alerta, mostrarAlerta} = alertaContext;
+    const alertaContext = useContext(AlertaContext);
+    const {alerta, mostrarAlerta} = alertaContext;
 
     const [proveedor, setProveedor] = useState({
         personid: -1,
@@ -39,7 +39,7 @@ export default function FormularioProveedor(){
         companyLogo:'',
         title:'',
         workPosition:'',
-        active:''
+        active:true
     })
 
     const ProveedorContext = useContext(proveedorContext);
@@ -78,7 +78,7 @@ export default function FormularioProveedor(){
                 companyLogo:'',
                 title:'',
                 workPosition:'',
-                active:''
+                active:true
             };
             const {_id, name, lastname, identidad, gender, rtn, fec_nac, phone1, phone2, email, country, city, location, 
                     website, facebook, twitter, linkedin,skype} = proveedorseleccionado.personid;
@@ -145,7 +145,7 @@ export default function FormularioProveedor(){
                 companyLogo:'',
                 title:'',
                 workPosition:'',
-                active:''
+                active:true
             })
         }
     }, [proveedorseleccionado])
@@ -179,13 +179,16 @@ export default function FormularioProveedor(){
 
         //Comprobamos si es agregar o editar
         if(proveedorseleccionado === null){
-            console.log('proveedor form ',proveedor);
+            //console.log('proveedor form ',proveedor);
             agregarProveedor(proveedor);
+            mostrarAlerta('Proveedor agregado exitosamente!', 'alert-success');
             //Redirigimos a la tabla de ver proveedores
             history.push('/admin/proveedores');
             
         }else{
             actualizarProveedor(proveedor);
+            mostrarAlerta('Proveedor actualizado exitosamente!');
+            //Redirigimos a la tabla de ver proveedores
             history.push('/admin/proveedores');
         }
 
@@ -219,7 +222,7 @@ export default function FormularioProveedor(){
             companyLogo:'',
             title:'',
             workPosition:'',
-            active:''
+            active:true
         })
     }
 
@@ -234,6 +237,15 @@ export default function FormularioProveedor(){
                         <div className="errores">
                             {errorproveedor ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
                         </div>
+                        {alerta ? 
+                        (
+                            <div className={`alert ${alerta.tipoAlerta}`}>
+                                {alerta.msg}
+                                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">X</span>
+                                </button>
+                            </div>
+                        ): null}
                         
                         <form onSubmit={handleSubmit}>
                             <div className="row">
@@ -590,7 +602,7 @@ export default function FormularioProveedor(){
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <div className="switch switch-primary d-inline m-r-10">
-                                                    <input type="checkbox" id="switch-p-2" name="active" value="true" onChange={onChange}/>
+                                                    <input type="checkbox" id="switch-p-2" name="active" value={active} onChange={onChange}/>
                                                     <label htmlFor="switch-p-2" className="cr"></label>
                                                 </div>
                                                 <label htmlFor="">Activo</label>

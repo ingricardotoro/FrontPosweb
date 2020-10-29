@@ -15,8 +15,7 @@ export default function Usuarios(){
 
     const [termino, setTermino] = useState();
     let confirm;
-    //const history = useHistory()
-
+    
     useEffect(()=>{
         obtenerUsuarios();
     }, [obtenerUsuarios])
@@ -29,10 +28,7 @@ export default function Usuarios(){
             mostrarAlerta('Usuario eliminado exitosamente!', 'alert-success');
             obtenerUsuarios();
             return;
-        }else{
-            return;
-        }        
-        
+        }       
     }
 
     return(

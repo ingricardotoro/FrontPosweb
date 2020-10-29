@@ -6,16 +6,17 @@ import empleadoContext from '../../Context/empleados/empleadoContext';
 import alertaContext from '../../Context/alertas/alertaContext';
 
 export default function Empleados(){
+    const history = useHistory()
 
     const EmpleadoContext = useContext(empleadoContext);
-    const {eliminado, empleados, obtenerEmpleados, guardarEmpleadoActual, eliminarEmpleado } = EmpleadoContext;
+    const { empleados, obtenerEmpleados, guardarEmpleadoActual, eliminarEmpleado } = EmpleadoContext;
 
     const AlertaContext = useContext(alertaContext);
     const {alerta, mostrarAlerta} = AlertaContext;
 
     const [termino, setTermino] = useState();
 
-    const history = useHistory()
+    let confirm;
 
     useEffect(()=>{
         obtenerEmpleados();
@@ -27,12 +28,13 @@ export default function Empleados(){
     }
 
     const onClickEliminar = empleado => {
-        alert(`${eliminado} vamos a eliminar!`)
-        eliminarEmpleado(empleado);
-        if(eliminado){
-            mostrarAlerta('Empleado eliminado exitosamente!', 'alert-success')
+        confirm = window.confirm('¿Estas seguro de eliminarlo?');
+        
+        if(confirm){
+            eliminarEmpleado(empleado);
+            mostrarAlerta('Empleado eliminado exitosamente!', 'alert-success');
+            obtenerEmpleados();
         }
-        obtenerEmpleados();
     }
 
     return(

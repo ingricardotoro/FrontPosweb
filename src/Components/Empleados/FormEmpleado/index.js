@@ -184,7 +184,7 @@ export default function FormularioEmpleado(){
             codeEmployee: '',
             workLocation: '',
             workPosition: '',
-            active: false
+            active: true
         })
     }
 

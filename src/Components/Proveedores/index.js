@@ -3,15 +3,19 @@ import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import proveedorContext from '../../Context/proveedores/proveedorContext';
+import AlertContext from '../../Context/alertas/alertaContext';
 
 export default function Proveedores(){
+    const history = useHistory()
 
     const ProveedorContext = useContext(proveedorContext);
     const { proveedores, obtenerProveedores, guardarProveedorActual, eliminarProveedor, buscarProveedor } = ProveedorContext;
 
-    const [termino, setTermino] = useState();
+    const alertContext = useContext(AlertContext);
+    const {alerta, mostrarAlerta } = alertContext;
 
-    const history = useHistory()
+    const [termino, setTermino] = useState();
+    let confirm;
 
     useEffect(()=>{
         obtenerProveedores();
@@ -23,9 +27,12 @@ export default function Proveedores(){
     }
 
     const onClickEliminar = proveedor => {
-        alert('vamos a eliminar ayudaaaaaaaaaa!')
-        eliminarProveedor(proveedor);
-        obtenerProveedores();
+        confirm = window.confirm('¿Estas seguro de eliminarlo?');
+        if(confirm){
+            eliminarProveedor(proveedor);
+            mostrarAlerta('Proveedor eliminado exitosamente!', 'alert-success');
+            obtenerProveedores();
+        }
     }
 
     const handleSearch = () => {
@@ -46,20 +53,32 @@ export default function Proveedores(){
                 <div className="col-12">
                     <div className="card">
                         <div className="card-body">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <div className="input-group-text"><i className="ti-search"></i></div>
+                        {alerta ?
+                            (
+                                <div className={`alert ${alerta.tipoAlerta}`}>
+                                    {alerta.msg}
+                                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">X</span>
+                                    </button>
                                 </div>
-                                <input 
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Buscar proveedor..."
-                                    name="termino"
-                                    value={termino}
-                                    onChange={e=> setTermino(e.target.value)}
-                                    onKeyUp={()=>handleSearch()}
-                                />
-                            </div>
+                            )
+                            : 
+                            (   
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text"><i className="ti-search"></i></div>
+                                    </div>
+                                    <input 
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Buscar empleado..."
+                                        name="termino"
+                                        value={termino}
+                                        onChange={e=> setTermino(e.target.value)}
+                                    />
+                                </div>
+                            )
+                            }
                         </div>
                     </div>
                 </div>

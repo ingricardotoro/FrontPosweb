@@ -2,13 +2,13 @@ import React, {useState, useContext, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import clienteContext from '../../../Context/clientes/clienteContext';
-//import AlertaContext from '../../../Context/alertas/alertaContext';
+import AlertaContext from '../../../Context/alertas/alertaContext';
 
 export default function FormularioCliente(){
     const history = useHistory()
 
-    //const alertaContext = useContext(AlertaContext);
-    //const {alerta, mostrarAlerta} = alertaContext;
+    const alertaContext = useContext(AlertaContext);
+    const {alerta, mostrarAlerta} = alertaContext;
 
     const [cliente, setCliente] = useState({
         personid: -1,
@@ -30,10 +30,10 @@ export default function FormularioCliente(){
         linkedin: '',
         skype: '',
         codeCustomer: '',
-        payIVA: false,
+        payIVA: true,
         creditLimit: 0,
         levelPrice: '',
-        active: ''
+        active: true
     })
 
     const ClienteContext = useContext(clienteContext);
@@ -63,10 +63,10 @@ export default function FormularioCliente(){
                 linkedin: '',
                 skype: '',
                 codeCustomer: '',
-                payIVA: false,
+                payIVA: true,
                 creditLimit: 0,
                 levelPrice: '',
-                active: ''
+                active: true
             };
             const {_id, name, lastname, identidad, gender, rtn, fec_nac, phone1, phone2, email, country, city, location, 
                     website, facebook, twitter, linkedin,skype} = clienteseleccionado.personid;
@@ -121,7 +121,7 @@ export default function FormularioCliente(){
                 payIVA: false,
                 creditLimit: 0,
                 levelPrice: '',
-                active: ''
+                active: true
             })
         }
     }, [clienteseleccionado])
@@ -168,17 +168,14 @@ export default function FormularioCliente(){
 
         //Comprobamos si es agregar o editar
         if(clienteseleccionado === null){
-            console.log('cliente form ',cliente);
             agregarCliente(cliente);
+            mostrarAlerta('Cliente agregado exitosamente!', 'alert-success');
             //Redirigimos a la tabla de ver empleados
-            /*setTimeout(()=>{
-                mostrarAlerta('Empleado agrega exitosamente!', 'alert-info alert-dismissible fade show');
-                
-            },3000)*/
             history.push('/admin/clientes');
             
         }else{
             actualizarCliente(cliente);
+            mostrarAlerta('Cliente actualizado exitosamente!', 'alert-success')
             history.push('/admin/clientes');
         }
 
@@ -203,10 +200,10 @@ export default function FormularioCliente(){
             linkedin: '',
             skype: '',
             codeCustomer: '',
-            payIVA: '',
+            payIVA: true,
             creditLimit: '',
             levelPrice: '',
-            active: ''
+            active: true
         })
     }
 
@@ -221,6 +218,15 @@ export default function FormularioCliente(){
                         <div className="errores">
                             {errorcliente ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
                         </div>
+                        {alerta ? 
+                        (
+                            <div className={`alert ${alerta.tipoAlerta}`}>
+                                {alerta.msg}
+                                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">X</span>
+                                </button>
+                            </div>
+                        ): null}
                         
                         <form onSubmit={handleSubmit}>
                             <div className="row">
@@ -513,14 +519,14 @@ export default function FormularioCliente(){
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <div className="switch switch-primary d-inline m-r-10">
-                                                    <input type="checkbox" id="switch-p-2" name="payIVA" value="true" onChange={onChange}/>
+                                                    <input type="checkbox" id="switch-p-2" name="payIVA" value={payIVA} onChange={onChange}/>
                                                     <label htmlFor="switch-p-2" className="cr"></label>
                                                 </div>
                                                 <label htmlFor="">Paga IVA</label>
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <div className="switch switch-primary d-inline m-r-10">
-                                                    <input type="checkbox" id="switch-p-1" name="active" value="true" onChange={onChange}/>
+                                                    <input type="checkbox" id="switch-p-1" name="active" value={active} onChange={onChange}/>
                                                     <label htmlFor="switch-p-1" className="cr"></label>
                                                 </div>
                                                 <label htmlFor="">Activo</label>

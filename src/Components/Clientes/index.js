@@ -2,16 +2,21 @@ import React,  { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+import alertaContext from '../../Context/alertas/alertaContext';
 import clienteContext from '../../Context/clientes/clienteContext';
 
 export default function Empleados(){
+    const history = useHistory();
 
     const ClienteContext = useContext(clienteContext);
     const { clientes, obtenerClientes, guardarClienteActual, eliminarCliente, buscarCliente } = ClienteContext;
 
+    const AlertaContext = useContext(alertaContext);
+    const {alerta, mostrarAlerta} = AlertaContext;
+
     const [termino, setTermino] = useState();
 
-    const history = useHistory()
+    let confirm;
 
     useEffect(()=>{
         obtenerClientes();
@@ -19,13 +24,18 @@ export default function Empleados(){
 
     const seleccionarCliente = cliente => {
         guardarClienteActual(cliente);
-        history.push('clientes/nuevo')
+        history.push('clientes/nuevo');
     }
 
     const onClickEliminar = cliente => {
-        alert('vamos a eliminar ayudaaaaaaaaaa!')
-        eliminarCliente(cliente);
-        obtenerClientes();
+        confirm = window.confirm('¿Estas seguro de eliminarlo?');
+        if(confirm){
+            eliminarCliente(cliente);
+            mostrarAlerta('Cliente eliminado exitosamente!', 'alert-success');
+            obtenerClientes();
+            return;
+        }
+        
     }
 
     const handleSearch = () => {
@@ -45,21 +55,33 @@ export default function Empleados(){
             <div className="row">
                 <div className="col-12">
                     <div className="card">
-                        <div className="card-body">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <div className="input-group-text"><i className="ti-search"></i></div>
+                        <div className="card-body"> 
+                        {alerta ?
+                            (
+                                <div className={`alert ${alerta.tipoAlerta}`}>
+                                    {alerta.msg}
+                                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">X</span>
+                                    </button>
                                 </div>
-                                <input 
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Buscar cliente..."
-                                    name="termino"
-                                    value={termino}
-                                    onChange={e=> setTermino(e.target.value)}
-                                    onKeyUp={()=>handleSearch()}
-                                />
-                            </div>
+                            )
+                            : 
+                            (    
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text"><i className="ti-search"></i></div>
+                                    </div>
+                                    <input 
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Buscar empleado..."
+                                        name="termino"
+                                        value={termino}
+                                        onChange={e=> setTermino(e.target.value)}
+                                    />
+                                </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>
