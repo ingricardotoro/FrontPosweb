@@ -32,7 +32,7 @@ export default function FormularioEmpleado(){
         codeEmployee: '',
         workLocation: '',
         workPosition: '',
-        active: ''
+        active: true
     })
 
     const EmpleadoContext = useContext(empleadoContext);
@@ -64,7 +64,7 @@ export default function FormularioEmpleado(){
                 codeEmployee: '',
                 workLocation: '',
                 workPosition: '',
-                active: ''
+                active: true
             };
             const {_id, name, lastname, identidad, gender, rtn, fec_nac, phone1, phone2, email, country, city, location, 
                     website, facebook, twitter, linkedin,skype} = empleadoseleccionado.personid;
@@ -117,7 +117,7 @@ export default function FormularioEmpleado(){
                 codeEmployee: '',
                 workLocation: '',
                 workPosition: '',
-                active: ''
+                active: true
             })
         }
     }, [empleadoseleccionado])
@@ -145,7 +145,7 @@ export default function FormularioEmpleado(){
             return;
         }
 
-        console.log(active)
+        alert(active)
 
         //Comprobamos si es agregar o editar
         if(empleadoseleccionado === null){
@@ -184,7 +184,7 @@ export default function FormularioEmpleado(){
             codeEmployee: '',
             workLocation: '',
             workPosition: '',
-            active: ''
+            active: false
         })
     }
 
@@ -502,7 +502,7 @@ export default function FormularioEmpleado(){
                                             </div>
                                             <div className="form-group col-md-12">
                                                 <div className="switch switch-primary d-inline m-r-10">
-                                                    <input type="checkbox" id="switch-p-1" name="active" value="true" onChange={onChange}/>
+                                                    <input type="checkbox" id="switch-p-1" name="active" value={active} onChange={onChange}/>
                                                     <label htmlFor="switch-p-1" className="cr"></label>
                                                 </div>
                                                 <label htmlFor="">Activo</label>

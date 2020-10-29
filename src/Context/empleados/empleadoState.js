@@ -29,12 +29,11 @@ const EmpleadoState = props => {
         try {
             const response = await Axios.get('employees');
             //console.log('obteniendo empleado ',response);
-            if(response.ok){
-                dispatch({
-                    type: LISTAR_EMPLEADOS,
-                    payload: response.data.employees
-                })
-            }
+            dispatch({
+                type: LISTAR_EMPLEADOS,
+                payload: response.data.employees
+            })
+            
 
         } catch (error) {
             console.log(error);

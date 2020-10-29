@@ -27,11 +27,13 @@ export default function Login(props){
                 history.push('admin/inicio')
         } 
         
-        /*if(mensaje){ 
-            mostrarAlerta('Credenciales incorrectas!', mensaje.tipoAlerta); 
-        }*/
+    },[role, autenticado, history])
 
-    },[role, autenticado, history, mostrarAlerta])
+    /*useEffect(()=>{
+        if(mensaje){ 
+            mostrarAlerta('Credenciales incorrectas!', mensaje.tipoAlerta); 
+        }
+    },[mensaje,mostrarAlerta])*/
 
     const [usuario, setUsuario] = useState({
         username: '',
