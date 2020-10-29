@@ -1,6 +1,6 @@
 import React,  { useContext, useEffect } from 'react';
 import { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import usuarioContext from '../../Context/usuarios/usuarioContext';
 import alertaContext from '../../Context/alertas/alertaContext';
@@ -14,7 +14,7 @@ export default function Usuarios(){
     const {alerta, mostrarAlerta} = AlertaContext;
 
     const [termino, setTermino] = useState();
-    let confirm ;
+    let confirm;
     //const history = useHistory()
 
     useEffect(()=>{

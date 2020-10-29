@@ -29,10 +29,13 @@ const ProveedorState = props => {
         try {
             const response = await Axios.get('suppliers');
             //console.log('obteniendo proveedores ',response);
-            dispatch({
-                type: LISTAR_PROVEEDORES,
-                payload: response.data.suppliers
-            })
+            if(response.ok){
+                dispatch({
+                    type: LISTAR_PROVEEDORES,
+                    payload: response.data.suppliers
+                })
+            }
+            
         } catch (error) {
             console.log(error);
         }
@@ -43,25 +46,30 @@ const ProveedorState = props => {
         try {
             const response = await Axios.post('suppliers', proveedor);
             //console.log('guardando proveedor ',response);
+            if(response.ok){
+                dispatch({
+                    type: AGREGAR_PROVEEDOR,
+                    payload: proveedor
+                })
+            }
             
-            dispatch({
-                type: AGREGAR_PROVEEDOR,
-                payload: proveedor
-            })
         } catch (error) {
             console.log(error);
         }
     }
 
     const actualizarProveedor = async proveedor => {
-        console.log('proveedor a actualizar ', proveedor)
+        //console.log('proveedor a actualizar ', proveedor)
         try {
             const response = await Axios.put(`suppliers/update/${proveedor._id}`, proveedor);
-            console.log(response);
-            dispatch({
-                type: ACTUALIZAR_PROVEEDOR,
-                payload: response.data.proveedorActualizado
-            })
+            //console.log(response);
+            if(response.ok){
+                dispatch({
+                    type: ACTUALIZAR_PROVEEDOR,
+                    payload: response.data.proveedorActualizado
+                })
+            }
+            
         } catch (error) {
             console.log(error);
         }

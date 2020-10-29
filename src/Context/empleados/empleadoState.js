@@ -29,10 +29,13 @@ const EmpleadoState = props => {
         try {
             const response = await Axios.get('employees');
             //console.log('obteniendo empleado ',response);
-            dispatch({
-                type: LISTAR_EMPLEADOS,
-                payload: response.data.employees
-            })
+            if(response.ok){
+                dispatch({
+                    type: LISTAR_EMPLEADOS,
+                    payload: response.data.employees
+                })
+            }
+
         } catch (error) {
             console.log(error);
             
@@ -44,11 +47,13 @@ const EmpleadoState = props => {
         try {
             const response = await Axios.post('employees', empleado);
             //console.log('guardando empleado ',response);
+            if(response.ok){
+                dispatch({
+                    type: AGREGAR_EMPLEADO,
+                    payload: empleado
+                })
+            }
             
-            dispatch({
-                type: AGREGAR_EMPLEADO,
-                payload: empleado
-            })
         } catch (error) {
             console.log(error);
             dispatch({
@@ -62,10 +67,12 @@ const EmpleadoState = props => {
         try {
             const response = await Axios.put(`employees/update/${empleado._id}`, empleado);
             //console.log(response);
-            dispatch({
-                type: ACTUALIZAR_EMPLEADO,
-                payload: response.data.empleadoActualizado
-            })
+            if(response.ok){
+                dispatch({
+                    type: ACTUALIZAR_EMPLEADO,
+                    payload: response.data.empleadoActualizado
+                })
+            }
         } catch (error) {
             console.log(error);
         }

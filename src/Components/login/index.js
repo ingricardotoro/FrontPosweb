@@ -18,13 +18,11 @@ export default function Login(props){
     const {alerta, mostrarAlerta} = alertaContext;
 
     const authContext = useContext(AuthContext);
-    const {role,usuarioAuth, mensaje, autenticado, iniciarSesion} = authContext;
-
+    const {role, autenticado, iniciarSesion} = authContext;
 
     useEffect(()=>{
         if(autenticado){
-            console.log(usuarioAuth);
-            
+            //console.log(usuarioAuth);
             if(role==='USER_ROLE')
                 history.push('admin/inicio')
         } 
@@ -33,7 +31,7 @@ export default function Login(props){
             mostrarAlerta('Credenciales incorrectas!', mensaje.tipoAlerta); 
         }*/
 
-    },[mensaje, autenticado, history, mostrarAlerta])
+    },[role, autenticado, history, mostrarAlerta])
 
     const [usuario, setUsuario] = useState({
         username: '',
@@ -59,7 +57,7 @@ export default function Login(props){
         if(username.trim()==='' || password.trim()===''){
             mostrarAlerta('El nombre de usuario y la contraseña son obligatorios', 'alert-danger alert-dismissible fade show');
         }
-        
+
         iniciarSesion({username, password});
 
         setLoading(false);

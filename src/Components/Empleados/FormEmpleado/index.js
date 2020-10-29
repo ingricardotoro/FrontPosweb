@@ -2,13 +2,13 @@ import React, {useState, useContext, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import empleadoContext from '../../../Context/empleados/empleadoContext';
-//import AlertaContext from '../../../Context/alertas/alertaContext';
+import AlertaContext from '../../../Context/alertas/alertaContext';
 
 export default function FormularioEmpleado(){
     const history = useHistory()
 
-    //const alertaContext = useContext(AlertaContext);
-    //const {alerta, mostrarAlerta} = alertaContext;
+    const alertaContext = useContext(AlertaContext);
+    const {alerta, mostrarAlerta} = alertaContext;
 
     const [empleado, setEmpleado] = useState({
         personid: -1,
@@ -36,11 +36,11 @@ export default function FormularioEmpleado(){
     })
 
     const EmpleadoContext = useContext(empleadoContext);
-    const {editado, empleadoseleccionado, errorempleado, agregarEmpleado, actualizarEmpleado, validarEmpleado} = EmpleadoContext;
+    const { empleadoseleccionado, errorempleado, agregarEmpleado, actualizarEmpleado, validarEmpleado} = EmpleadoContext;
 
     useEffect(()=>{
         if(empleadoseleccionado !== null){
-            console.log('empleado seleccionado ',empleadoseleccionado)
+            //console.log('empleado seleccionado ',empleadoseleccionado)
             const empleadoActualizar = {
                 _id: empleadoseleccionado._id,
                 personid: '',
@@ -151,28 +151,16 @@ export default function FormularioEmpleado(){
         if(empleadoseleccionado === null){
             //console.log('empleado form ',empleado);
             agregarEmpleado(empleado);
+            mostrarAlerta('Empleado agregado exitosamente!', 'alert-success');
             //Redirigimos a la tabla de ver empleados
             history.push('/admin/empleados');
-            
         }else{
             actualizarEmpleado(empleado);
-            /*if(editado){
-                mostrarAlerta('Actualizado exitosamente!','alert-success');
-            }*/
+            mostrarAlerta('Empleado actualizado exitosamente!', 'alert-success');
+            //Redirigimos a tabla de ver empleados
             history.push('/admin/empleados');
-            
         }
-        /*
-        {alerta ? 
-            (
-                <div className={`alert ${alerta.tipoAlerta}`}>
-                    {alerta.msg ? 'Credenciales incorrectas': null}
-                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">X</span>
-                    </button>
-                </div>
-            ): null}*/
-
+        
         //Reiniciamos el formulario
         setEmpleado({
             personid: -1,
@@ -208,11 +196,21 @@ export default function FormularioEmpleado(){
                     <div className="card-body">
                         <h4 className="card-title">{empleadoseleccionado ? 'Editar Empleado': 'Agregar Empleado'}</h4>
                         <hr/>
-                        <div className="errores">
-                        
+                        <div className="errores">                
                         {errorempleado ? ( <small className="text-danger">Todos los campos son obligatorio</small>) : null}
                         </div>
-                        
+                        <div>
+                        {alerta ? 
+                        (
+                            <div className={`alert ${alerta.tipoAlerta}`}>
+                                {alerta.msg}
+                                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">X</span>
+                                </button>
+                            </div>
+                        ): null}
+
+                        </div>
                         <form onSubmit={handleSubmit}>
                             <div className="row">
                                 <div className="col-md-6">
