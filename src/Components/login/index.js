@@ -18,17 +18,19 @@ export default function Login(props){
     const {alerta, mostrarAlerta} = alertaContext;
 
     const authContext = useContext(AuthContext);
-    const {usuarioAuth, mensaje, autenticado, iniciarSesion} = authContext;
+    const {role,usuarioAuth, mensaje, autenticado, iniciarSesion} = authContext;
 
 
     useEffect(()=>{
         if(autenticado){
-            history.push('admin/inicio')
+            console.log(usuarioAuth);
+            
+            if(role==='USER_ROLE')
+                history.push('admin/inicio')
         } 
         
         /*if(mensaje){ 
-            mostrarAlerta(mensaje, mensaje.tipoAlerta); 
-            break;
+            mostrarAlerta('Credenciales incorrectas!', mensaje.tipoAlerta); 
         }*/
 
     },[mensaje, autenticado, history, mostrarAlerta])

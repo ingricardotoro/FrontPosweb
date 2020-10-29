@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory } from 'react-router-dom';
 
 import logo from './logo.png';
 import userImg from '../Header/user_default.png';
@@ -9,16 +9,23 @@ import AuthContext from '../../../Context/autenticacion/authContext';
 export default function Navbar(){
     
     const authContext = useContext(AuthContext);
-    const {autenticado, usuarioAuth} = authContext;
+    const {autenticado, usuarioAuth, cerrarSesion} = authContext;
+
+    const history = useHistory();
+
+    const cerrarSesionNav = ()=>{
+        cerrarSesion();
+        history.push('/')
+    }
 
     return (
         <header className="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
             <div className="m-header">
                 <div className="mobile-menu" id="mobile-collapse"><span></span></div>
-                <Link to="/panel-admin" className="b-brand">
+                <Link to="#!" className="b-brand">
                     <img src={logo} alt="logo" className="logo"/>
                 </Link>
-                <Link to="/panel-admin" className="mob-toggler">
+                <Link to={`#!`} className="mob-toggler">
                     <i className="ti-more-alt"></i>
                 </Link>
             </div>
@@ -46,7 +53,10 @@ export default function Navbar(){
                                     </div>
                                 <ul className="pro-body">
                                     <li><Link to="#!" className="dropdown-item"><i className="ti-user"></i>Perfil</Link></li>
-                                    <li><Link to="#!" className="dropdown-item"><i className="ti-lock"></i>Cerrar Sesion</Link></li>
+                                    <li><button onClick={()=> cerrarSesionNav()} className="dropdown-item">
+                                        <i className="ti-lock"></i>Cerrar Sesion
+                                        </button>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

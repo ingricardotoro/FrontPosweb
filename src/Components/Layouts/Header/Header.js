@@ -33,7 +33,6 @@ export default function Header(){
                             : 
                             null
                             }
-                            
                         </div>
                         <ul className="nav pcoded-inner-navbar">
                             <li className="nav-item pcoded-menu-caption"><label htmlFor="">Inicio</label></li>
@@ -68,8 +67,7 @@ export default function Header(){
                                     <span className="pcoded-micon"><i className="ti-truck"></i></span>
                                     <span className="pcoded-mtext">Proveedores</span>
                                 </Link>
-                            </li>
-                            
+                            </li>                           
                         </ul>
                     </div>
                 </div>

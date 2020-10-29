@@ -27,7 +27,6 @@ export default (state, action) => {
                 ...state,
                 empleados: [...state.empleados, action.payload],
                 errorempleado: false,
-                agregado: true
             }
         case VALIDAR_EMPLEADO:
             return {
@@ -43,8 +42,7 @@ export default (state, action) => {
         case ACTUALIZAR_EMPLEADO:
             return {
                 ...state,
-                empleado: state.empleados.map(empleado=>empleado._id === action.payload._id ? action.payload : empleado),
-                editado: true
+                empleado: state.empleados.map(empleado=>empleado._id === action.payload._id ? action.payload : empleado)
             }
         
         case LIMPIAR_EMPLEADO_SELECCIONADO:
@@ -55,8 +53,7 @@ export default (state, action) => {
         case ELIMINAR_EMPLEADO:
             return {
                 ...state,
-                empleados: state.empleados.filter(empleado => empleado._id !== action.payload),
-                eliminado: true
+                empleados: state.empleados.filter(empleado => empleado._id !== action.payload)
             }
 
         default:

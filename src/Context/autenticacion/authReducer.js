@@ -7,8 +7,9 @@ export default (state, action) =>{
             return{
                 ...state,
                 autenticado: true,
-                mensaje: action.payload,
+                mensaje: action.payload.msj,
                 usuarioAuth: action.payload.userDB,
+                role: action.payload.userDB.role,
                 cargando: false
             }
             
@@ -19,7 +20,7 @@ export default (state, action) =>{
                 ...state,
                 token: null,
                 usuario: null,
-                mensaje: action.payload.msg.response.data.errors,
+                mensaje: action.payload,
                 cargando: false
             }
         default:

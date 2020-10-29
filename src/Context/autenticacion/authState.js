@@ -11,6 +11,7 @@ const AuthState = props =>{
         token: localStorage.getItem('token'),
         autenticado: null,
         usuarioAuth: null,
+        role:null,
         mensaje: null,
         cargando: true
     }
@@ -20,12 +21,11 @@ const AuthState = props =>{
     const iniciarSesion = async data =>{
         try {
             const response = await Axios.post('auth/login', data);
-            console.log(response);
+            console.log(response.data);
 
-            if(response.status===400){
-                alert(response.errors)
+            if(response.data.ok===false){
                 const alerta = {
-                    msg: response.data.errors.password.msg,
+                    msg: response.data.errors,
                     tipoAlerta: 'alert-danger alert-dismissible fade show'
                 }
                 
@@ -46,7 +46,7 @@ const AuthState = props =>{
             console.error('error login ',error);
 
             const alerta = {
-                msg: error,
+                msg: error.response.data.errors,
                 tipoAlerta: 'alert-danger alert-dismissible fade show'
             }
 
@@ -69,6 +69,7 @@ const AuthState = props =>{
                 token: state.token,
                 autenticado: state.autenticado,
                 usuarioAuth: state.usuarioAuth,
+                role: state.role,
                 cargando: state.cargando,
                 mensaje: state.mensaje,
                 iniciarSesion,

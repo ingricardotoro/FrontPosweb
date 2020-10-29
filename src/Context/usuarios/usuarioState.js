@@ -73,7 +73,6 @@ const UsuarioState = props => {
         }
     }
 
-    
     const eliminarUsuario = async usuario => {
         console.log('usuario a eliminar ', usuario)
         try {

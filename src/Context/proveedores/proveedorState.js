@@ -28,7 +28,7 @@ const ProveedorState = props => {
     const obtenerProveedores = async () => {
         try {
             const response = await Axios.get('suppliers');
-            console.log('obteniendo proveedores ',response);
+            //console.log('obteniendo proveedores ',response);
             dispatch({
                 type: LISTAR_PROVEEDORES,
                 payload: response.data.suppliers
@@ -39,10 +39,10 @@ const ProveedorState = props => {
     }
     
     const agregarProveedor = async proveedor => {
-        console.log('proveedor form ', proveedor)
+        //console.log('proveedor form ', proveedor)
         try {
             const response = await Axios.post('suppliers', proveedor);
-           console.log('guardando proveedor ',response);
+            //console.log('guardando proveedor ',response);
             
             dispatch({
                 type: AGREGAR_PROVEEDOR,
@@ -68,7 +68,7 @@ const ProveedorState = props => {
     }
 
     const eliminarProveedor = async proveedor => {
-        console.log('proveedor a eliminar ', proveedor)
+        //console.log('proveedor a eliminar ', proveedor)
         try {
             await Axios.delete(`suppliers/delete/${proveedor._id}`);
             dispatch({

@@ -20,10 +20,7 @@ const EmpleadoState = props => {
     const initalState = {
         empleados: [],
         errorempleado: false,
-        empleadoseleccionado: null,
-        agregado: false,
-        editado: false,
-        eliminado: false
+        empleadoseleccionado: null
     }
 
     const [state, dispatch] = useReducer(empleadoReducer, initalState);
@@ -46,7 +43,7 @@ const EmpleadoState = props => {
         //console.log(empleado)
         try {
             const response = await Axios.post('employees', empleado);
-            console.log('guardando empleado ',response);
+            //console.log('guardando empleado ',response);
             
             dispatch({
                 type: AGREGAR_EMPLEADO,
@@ -125,9 +122,6 @@ const EmpleadoState = props => {
                 empleados: state.empleados,
                 errorempleado: state.errorempleado,
                 empleadoseleccionado: state.empleadoseleccionado,
-                agregado: state.agregado,
-                eliminado: state.eliminado,
-                editado: state.editado,
                 obtenerEmpleados,
                 agregarEmpleado,
                 actualizarEmpleado,
