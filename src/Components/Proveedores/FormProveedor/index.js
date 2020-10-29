@@ -187,7 +187,7 @@ export default function FormularioProveedor(){
             
         }else{
             actualizarProveedor(proveedor);
-            mostrarAlerta('Proveedor actualizado exitosamente!');
+            mostrarAlerta('Proveedor actualizado exitosamente!', 'alert-success');
             //Redirigimos a la tabla de ver proveedores
             history.push('/admin/proveedores');
         }

@@ -29,12 +29,12 @@ const ProveedorState = props => {
         try {
             const response = await Axios.get('suppliers');
             //console.log('obteniendo proveedores ',response);
-            if(response.ok){
-                dispatch({
-                    type: LISTAR_PROVEEDORES,
-                    payload: response.data.suppliers
-                })
-            }
+            
+            dispatch({
+                type: LISTAR_PROVEEDORES,
+                payload: response.data.suppliers
+            })
+            
             
         } catch (error) {
             console.log(error);
