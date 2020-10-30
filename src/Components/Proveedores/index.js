@@ -1,4 +1,4 @@
-import React,  { useContext, useEffect } from 'react';
+import React,  { useContext, useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -9,12 +9,14 @@ export default function Proveedores(){
     const history = useHistory()
 
     const ProveedorContext = useContext(proveedorContext);
-    const { proveedores, obtenerProveedores, guardarProveedorActual, eliminarProveedor, buscarProveedor } = ProveedorContext;
+    const { proveedores, obtenerProveedores, guardarProveedorActual, eliminarProveedor } = ProveedorContext;
 
     const alertContext = useContext(AlertContext);
     const {alerta, mostrarAlerta } = alertContext;
-
-    const [termino, setTermino] = useState();
+    //Para buscar entre proveedores
+    const [consulta, setConsulta] = useState('');
+    const [filterProveedores, setFilterProveedores] = useState(proveedores);
+    //Alerta para eliminar
     let confirm;
 
     useEffect(()=>{
@@ -35,18 +37,13 @@ export default function Proveedores(){
         }
     }
 
-    const handleSearch = () => {
-        
-        let proveedorBuscar = termino.trim().toLowerCase()
-
-        if(proveedorBuscar.length === 0){
-            return proveedores;
-        }
-
-        buscarProveedor(proveedorBuscar)
-
-    }
-
+    useMemo(()=>{
+        const results = proveedores.filter(proveedor=>{
+            return `${proveedor.companyName} ${proveedor.personid.name}`.toLowerCase().includes(consulta.toLowerCase());
+        })
+        setFilterProveedores(results);
+    },[consulta, proveedores])
+    
     return(
         <>
             <div className="row">
@@ -71,10 +68,10 @@ export default function Proveedores(){
                                     <input 
                                         type="text"
                                         className="form-control"
-                                        placeholder="Buscar empleado..."
-                                        name="termino"
-                                        value={termino}
-                                        onChange={e=> setTermino(e.target.value)}
+                                        placeholder="Buscar proveedor..."
+                                        name="consulta"
+                                        value={consulta}
+                                        onChange={e=> setConsulta(e.target.value)}
                                     />
                                 </div>
                             )
@@ -122,12 +119,12 @@ export default function Proveedores(){
                                     </thead>
                                     <tbody>
                                         {
-                                            proveedores.length === 0
+                                            filterProveedores.length === 0
                                             ?
                                             <tr>No hay proveedores</tr>
                                             :
                                             (
-                                                proveedores.map(proveedor => {
+                                                filterProveedores.map(proveedor => {
                                                     return(
                                                     <tr key={proveedor._id} >  
                                                         <td>{proveedor.codeSupplier}</td>

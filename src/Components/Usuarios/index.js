@@ -1,5 +1,4 @@
-import React,  { useContext, useEffect } from 'react';
-import { useState } from 'react';
+import React,  { useContext, useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import usuarioContext from '../../Context/usuarios/usuarioContext';
@@ -12,13 +11,24 @@ export default function Usuarios(){
 
     const AlertaContext = useContext(alertaContext);
     const {alerta, mostrarAlerta} = AlertaContext;
-
-    const [termino, setTermino] = useState();
     let confirm;
+
+    const [consulta, setConsulta] = useState('');
+    const [filterUsuarios, setFilterUsuarios] = useState(usuarios);
     
     useEffect(()=>{
         obtenerUsuarios();
-    }, [obtenerUsuarios])
+    }, [obtenerUsuarios]);
+
+    useMemo(()=>{
+        const result = usuarios.filter(usuario=>{
+            return `${usuario.username}
+                    ${usuario.role}`
+                    .toLowerCase()
+                    .includes(consulta.toLowerCase())
+        })
+        setFilterUsuarios(result);
+    },[consulta, usuarios])
    
     const onClickEliminar = usuario => {
         confirm = window.confirm('¿Estas seguro de eliminarlo?');
@@ -55,9 +65,9 @@ export default function Usuarios(){
                                         type="text"
                                         className="form-control"
                                         placeholder="Buscar usuario..."
-                                        name="termino"
-                                        value={termino}
-                                        onChange={e=> setTermino(e.target.value)}
+                                        name="consulta"
+                                        value={consulta}
+                                        onChange={e=> setConsulta(e.target.value)}
                                     />
                                 </div>
                             )
@@ -96,12 +106,12 @@ export default function Usuarios(){
                                     </thead>
                                     <tbody>
                                         {
-                                            usuarios.length === 0
+                                            filterUsuarios.length === 0
                                             ?
                                             <tr>No hay usuarios</tr>
                                             :
                                             (
-                                                usuarios.map(usuario => {
+                                                filterUsuarios.map(usuario => {
                                                     return(
                                                     <tr key={usuario._id} >  
                                                         <td>{usuario.employeeid.codeEmployee}</td>

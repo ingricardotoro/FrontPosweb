@@ -5,19 +5,12 @@ import {
     ACTUAL_EMPLEADO,
     ACTUALIZAR_EMPLEADO,
     ELIMINAR_EMPLEADO,
-    BUSCAR_EMPLEADO,
     LIMPIAR_EMPLEADO_SELECCIONADO
 } from '../../types';
 
 export default (state, action) => {
     switch(action.type){
         case LISTAR_EMPLEADOS:
-            return {
-                ...state,
-                empleados: action.payload
-            }
-        
-        case BUSCAR_EMPLEADO:
             return {
                 ...state,
                 empleados: action.payload

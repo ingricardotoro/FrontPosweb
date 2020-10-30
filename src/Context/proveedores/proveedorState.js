@@ -9,7 +9,6 @@ import {
     VALIDAR_PROVEEDOR,
     ACTUAL_PROVEEDOR,
     ACTUALIZAR_PROVEEDOR,
-    BUSCAR_PROVEEDOR,
     LIMPIAR_PROVEEDOR_SELECCIONADO,
     ELIMINAR_PROVEEDOR
 } from '../../types';
@@ -88,14 +87,6 @@ const ProveedorState = props => {
         }
     }
 
-    const buscarProveedor = async termino => {
-        
-        dispatch({
-            type: BUSCAR_PROVEEDOR,
-            payload: termino
-        })
-    }
-
     const validarProveedor = () =>{
         dispatch({
             type: VALIDAR_PROVEEDOR
@@ -125,7 +116,6 @@ const ProveedorState = props => {
                 agregarProveedor,
                 actualizarProveedor,
                 eliminarProveedor,
-                buscarProveedor,
                 validarProveedor,
                 guardarProveedorActual,
                 limpiarProveedorSeleccionado

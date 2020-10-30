@@ -10,7 +10,6 @@ import {
     ACTUAL_EMPLEADO,
     ACTUALIZAR_EMPLEADO,
     ELIMINAR_EMPLEADO,
-    BUSCAR_EMPLEADO,
     LIMPIAR_EMPLEADO_SELECCIONADO
 } from '../../types';
 
@@ -90,19 +89,6 @@ const EmpleadoState = props => {
         }
     }
 
-    const buscarEmpleado = async (termino, empleados) => {
-        
-        empleados.filter(empleado=>
-            empleado.personid.name.toLowerCase().indexOf(termino) > -1 ||
-            empleado.personid.lastname.toLowerCase().indexOf(termino) > -1
-        )
-        
-        dispatch({
-            type: BUSCAR_EMPLEADO,
-            payload: empleados
-        })
-    }
-
     const validarEmpleado = () =>{
         dispatch({
             type: VALIDAR_EMPLEADO
@@ -132,7 +118,6 @@ const EmpleadoState = props => {
                 agregarEmpleado,
                 actualizarEmpleado,
                 eliminarEmpleado,
-                buscarEmpleado,
                 validarEmpleado,
                 guardarEmpleadoActual,
                 limpiarEmpleadoSeleccionado,

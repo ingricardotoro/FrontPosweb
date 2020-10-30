@@ -1,4 +1,4 @@
-import React,  { useContext, useEffect } from 'react';
+import React,  { useContext, useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -9,18 +9,29 @@ export default function Empleados(){
     const history = useHistory();
 
     const ClienteContext = useContext(clienteContext);
-    const { clientes, obtenerClientes, guardarClienteActual, eliminarCliente, buscarCliente } = ClienteContext;
+    const { clientes, obtenerClientes, guardarClienteActual, eliminarCliente } = ClienteContext;
 
     const AlertaContext = useContext(alertaContext);
     const {alerta, mostrarAlerta} = AlertaContext;
 
-    const [termino, setTermino] = useState();
-
     let confirm;
+
+    const [consulta, setConsulta] = useState('');
+    const [filterClientes, setFilterClientes] = useState(clientes);
 
     useEffect(()=>{
         obtenerClientes();
-    }, [obtenerClientes])
+    }, [obtenerClientes]);
+
+    useMemo(()=>{
+        const result = clientes.filter(cliente=>{
+            return `${cliente.personid.name} 
+                    ${cliente.personid.lastname}`
+                    .toLowerCase()
+                    .includes(consulta.toLowerCase())
+        })
+        setFilterClientes(result);
+    },[consulta, clientes])
 
     const seleccionarCliente = cliente => {
         guardarClienteActual(cliente);
@@ -34,20 +45,7 @@ export default function Empleados(){
             mostrarAlerta('Cliente eliminado exitosamente!', 'alert-success');
             obtenerClientes();
             return;
-        }
-        
-    }
-
-    const handleSearch = () => {
-        
-        let clienteBuscar = termino.trim().toLowerCase()
-
-        if(clienteBuscar.length === 0){
-            return clientes;
-        }
-
-        buscarCliente(clienteBuscar)
-
+        }        
     }
 
     return(
@@ -74,10 +72,10 @@ export default function Empleados(){
                                     <input 
                                         type="text"
                                         className="form-control"
-                                        placeholder="Buscar empleado..."
-                                        name="termino"
-                                        value={termino}
-                                        onChange={e=> setTermino(e.target.value)}
+                                        placeholder="Buscar cliente..."
+                                        name="consulta"
+                                        value={consulta}
+                                        onChange={e=> setConsulta(e.target.value)}
                                     />
                                 </div>
                                 )
@@ -124,12 +122,12 @@ export default function Empleados(){
                                     </thead>
                                     <tbody>
                                         {
-                                            clientes.length === 0
+                                            filterClientes.length === 0
                                             ?
                                             <tr>No hay clientes</tr>
                                             :
                                             (
-                                                clientes.map(cliente => {
+                                                filterClientes.map(cliente => {
                                                     return(
                                                     <tr key={cliente._id} >  
                                                         <td>{cliente.codeCustomer}</td>

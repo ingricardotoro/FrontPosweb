@@ -4,7 +4,6 @@ import {
     VALIDAR_PROVEEDOR,
     ACTUAL_PROVEEDOR,
     ACTUALIZAR_PROVEEDOR,
-    BUSCAR_PROVEEDOR,
     LIMPIAR_PROVEEDOR_SELECCIONADO,
     ELIMINAR_PROVEEDOR
 } from '../../types';
@@ -12,11 +11,6 @@ import {
 export default (state, action) => {
     switch(action.type){
         case LISTAR_PROVEEDORES:
-            return {
-                ...state,
-                proveedores: action.payload
-            }
-        case BUSCAR_PROVEEDOR:
             return {
                 ...state,
                 proveedores: action.payload

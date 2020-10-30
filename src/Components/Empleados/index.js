@@ -1,5 +1,5 @@
 import React,  { useContext, useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import empleadoContext from '../../Context/empleados/empleadoContext';
@@ -14,13 +14,25 @@ export default function Empleados(){
     const AlertaContext = useContext(alertaContext);
     const {alerta, mostrarAlerta} = AlertaContext;
 
-    const [termino, setTermino] = useState();
+    const [consulta, setConsulta] = useState('');
+    const [filterEmpleados, setFilterEmpleados] = useState(empleados);
 
+    //Bolean para alerta confirmar que se elimina
     let confirm;
 
     useEffect(()=>{
         obtenerEmpleados();
     }, [obtenerEmpleados])
+
+    useMemo(()=>{
+        const result = empleados.filter(empleado=>{
+            return `${empleado.personid.name} 
+                    ${empleado.personid.lastname}
+                    ${empleado.workPosition}`.toLowerCase()
+                    .includes(consulta.toLowerCase())
+        })
+        setFilterEmpleados(result)
+    }, [consulta, empleados])
 
     const seleccionarEmpleado = empleado => {
         guardarEmpleadoActual(empleado);
@@ -61,9 +73,9 @@ export default function Empleados(){
                                         type="text"
                                         className="form-control"
                                         placeholder="Buscar empleado..."
-                                        name="termino"
-                                        value={termino}
-                                        onChange={e=> setTermino(e.target.value)}
+                                        name="consulta"
+                                        value={consulta}
+                                        onChange={e=> setConsulta(e.target.value)}
                                     />
                                 </div>
                             )
@@ -112,12 +124,12 @@ export default function Empleados(){
                                     </thead>
                                     <tbody>
                                         {
-                                            empleados.length === 0
+                                            filterEmpleados.length === 0
                                             ?
                                             <tr>No hay empleados</tr>
                                             :
                                             (
-                                                empleados.map(empleado => {
+                                                filterEmpleados.map(empleado => {
                                                     return(
                                                     <tr key={empleado._id} >  
                                                         <td>{empleado.codeEmployee}</td>
